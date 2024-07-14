@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>menu</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+	<link href="https://fonts.cdnfonts.com/css/apercu" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="../db/productsList.js"></script>
+	<style type="text/css">
+
+		body {
+			margin-left: 18px;
+			font-family: 'Apercu', sans-serif;
+		}
+
+
+		#logo {
+			padding: 1%;
+			width: 200px;
+		}
+
+		#header input[type=text] {
+		    padding: 6px;
+		    margin-top: 7%;
+		    font-size: 17px;
+		    border: 1px solid #ccc;
+		    width: 300px;
+		}
+
+		#header .search-container button {
+			background: #ccc;
+			float: right;
+			padding: 6px 10px;
+			margin-top: 7%;
+			margin-right: 10px;
+			background: #ddd;
+			font-size: 17px;
+			border: 1px solid #ccc;
+			cursor: pointer;
+		}
+
+		#header .search-container {
+		    float: right;
+		}
+
+		#header .search-container label {
+			font-size: 17px;
+		}
+
+		#header .checkboxSearch {
+            width: 15px;
+            height: 15px;
+        }
+
+		hr {
+			width: 100%;
+		}
+
+		#nav {
+            list-style: none inside;
+            margin: 0 -10px 0 0px;
+            padding: 0;
+            text-align: center;
+        }
+
+        #nav li {
+            display: block;
+            position: relative;
+            float: left;
+            background: white;
+            font-size: 26px;
+			z-index: 1;
+        }
+
+        #nav li ul {
+        	margin-right: 10px;
+        	margin-left: 10px;
+        }
+
+        #nav li a {
+            display: block;
+            padding-left: 10px;
+            margin-right: 40px;
+            line-height: 35px;
+            color: #800080;
+        }
+
+        #nav li li a {
+            font-size: 18px;
+        }
+
+        #nav li:hover {
+            background: white;
+            font-size: 26px;
+        }
+
+        #nav ul {
+            position: absolute;
+            padding: 0;
+            display: none;
+            box-shadow: 1px 1px 1px 1px grey;
+        }
+
+        #nav li:hover ul ul {
+            display: none;
+        }
+
+        #nav li:hover ul {
+            display: block;
+            background: white;
+        }
+
+        #nav li li:hover ul {
+        	position: relative;
+            display: block;
+        }
+
+		a {
+			text-decoration: none;
+		}
+
+		#mainText {
+			font: 40px black;
+			font-family: 'Apercu', sans-serif;
+			text-align: center;
+			color: #ff914d;
+		}
+
+		label {
+			font: 18px black;
+		}
+
+		#result {
+			text-decoration: none;
+  			display: inline-block;
+			width: 200px;
+			height: 58px;
+			border-radius: 15px;
+			border-color: #00bf63;
+			font-size: 18px;
+			text-align: center;
+			background: linear-gradient(#00bf63, #c1ff72);
+			margin-top: 2%;
+		}
+
+		#main {
+			display: inline-block;
+			width: 100%;
+		}
+
+		.container {
+			float: left;
+			width: 23%;
+			margin-right: 2%;
+			padding-bottom: 1%;
+			border: solid black 2px;
+		}
+
+		.dayName, #text {
+			font-size: 25px;
+            color: #800080;
+		}
+
+		#kkal, #menu {
+			border: 2px solid black;
+			margin-left: 20px;
+		}
+
+		#menuBlock {
+			padding-top: 3%;
+			padding-bottom: 2%;
+		}
+
+        .breakfast, .snack, .dinner, .supper {
+            padding-bottom: 0.5%;
+            font-size: 20px;
+			color: #ff914d;
+        }
+
+        .breakfast_disc, .snack_disc, .dinner_disc, .supper_disc {
+            padding-bottom: 1%;
+        }
+
+        .breakfast_products, .snack_products, .dinner_products, .supper_products {
+            padding-left: 10%;
+        }
+
+		.breakfast_kkal, .snack_kkal, .dinner_kkal, .supper_kkal {
+			padding-bottom: 20px;
+			color: #800080;
+			font-size: 19px;
+			float: right;
+		}
+	
+	</style>
+</head>
+<body>
+<div id="header">
+	<img id="logo" src="../img/logo.png" onclick="javascript:location.href='./index.html';">
+	<form class="search-container">
+		<input type="text" id="search" placeholder="Пошук ..." list="theList" oninput="searchMeal();">
+		<button type="submit"><a class="fa fa-search" href="./singlePage.html" onclick="saveSearchResult();"></a></button>
+		<div>
+			<br>
+			<input type="checkbox" id="recipeCheckbox" name="recipeCheckbox" class="checkboxSearch" checked disabled>
+			<label for="recipeCheckbox">Пошук по страві</label>
+			<input type="checkbox" id="productCheckbox" name="productCheckbox" class="checkboxSearch">
+			<label for="productCheckbox">Пошук по інгредіентам</label>
+		</div>
+	</form>
+</div>
+<hr>
+<ul id="nav">
+	<li><a href="./index.html" onclick="saveClickData('Рецепти')">Рецепти</a>
+		<ul>
+			<li><a href="./index.html" onclick="saveClickData('Сніданок')">Сніданок</a></li>
+			<li><a href="./index.html" onclick="saveClickData('Перекус')">Перекус</a></li>
+			<li><a href="./index.html" onclick="saveClickData('Обід')">Обід</a>
+			<li><a href="./index.html" onclick="saveClickData('Вечеря')">Вечеря</a></li>
+			<li><a href="./index.html" onclick="saveClickData('Свято')">Свято</a></li>
+		</ul>
+	</li>
+	<li><a href="./addRecipe.html">Додати рецепт</a></li>
+	<li><a href="./calculateKkal.html">Розрахунок калорій</a></li>
+	<li><a href="#">Зберегти меню</a></li>
+	<li><a href="./saveMenuChildren.html">Зберегти меню для сім'ї</a></li>
+	<li><a href="./archiveMenu.html">Архів меню</a></li>
+	<li><a href="./archiveFamilyMenu.html">Архів сімейного меню</a></li>
+</ul>
+<br>
+<br>
+<hr>
+<p id="mainText"></p>
+
+<div id="main">
+	<div class="container">
+		<div class="dayName">Понеділок / вівторок</div>
+		<div class="breakfast">Сніданок - ...</div>
+        <div class="breakfast_products"></div>
+        <div class="breakfast_disc"></div>
+		<div class="breakfast_kkal"></div>
+		<br>
+		<div class="snack">Перекус - ...</div>
+        <div class="snack_products"></div>
+        <div class="snack_disc"></div>
+		<div class="snack_kkal"></div>
+		<br>
+		<div class="dinner">Обід - ...</div>
+        <div class="dinner_products"></div>
+        <div class="dinner_disc"></div>
+		<div class="dinner_kkal"></div>
+		<br>
+		<div class="supper">Вечеря - ...</div>
+        <div class="supper_products"></div>
+        <div class="supper_disc"></div>
+		<div class="supper_kkal"></div>
+	</div>
+	<div class="container">
+		<div class="dayName">Середа / четвер</div>
+		<div class="breakfast">Сніданок - ...</div>
+        <div class="breakfast_products"></div>
+        <div class="breakfast_disc"></div>
+		<div class="breakfast_kkal"></div>
+		<br>
+		<div class="snack">Перекус - ...</div>
+        <div class="snack_products"></div>
+        <div class="snack_disc"></div>
+		<div class="snack_kkal"></div>
+		<br>
+		<div class="dinner">Обід - ...</div>
+        <div class="dinner_products"></div>
+        <div class="dinner_disc"></div>
+		<div class="dinner_kkal"></div>
+		<br>
+		<div class="supper">Вечеря - ...</div>
+        <div class="supper_products"></div>
+        <div class="supper_disc"></div>
+		<div class="supper_kkal"></div>
+	</div>
+	<div class="container">
+		<div class="dayName">П'ятниця / субота</div>
+		<div class="breakfast">Сніданок - ...</div>
+        <div class="breakfast_products"></div>
+        <div class="breakfast_disc"></div>
+		<div class="breakfast_kkal"></div>
+		<br>
+		<div class="snack">Перекус - ...</div>
+        <div class="snack_products"></div>
+        <div class="snack_disc"></div>
+		<div class="snack_kkal"></div>
+		<br>
+		<div class="dinner">Обід - ...</div>
+        <div class="dinner_products"></div>
+        <div class="dinner_disc"></div>
+		<div class="dinner_kkal"></div>
+		<br>
+		<div class="supper">Вечеря - ...</div>
+        <div class="supper_products"></div>
+        <div class="supper_disc"></div>
+		<div class="supper_kkal"></div>
+	</div>
+	<div class="container">
+		<div class="dayName">Неділя</div>
+		<div class="breakfast">Сніданок - ...</div>
+        <div class="breakfast_products"></div>
+        <div class="breakfast_disc"></div>
+		<div class="breakfast_kkal"></div>
+		<br>
+		<div class="snack">Перекус - ...</div>
+        <div class="snack_products"></div>
+        <div class="snack_disc"></div>
+		<div class="snack_kkal"></div>
+		<br>
+		<div class="dinner">Обід - ...</div>
+        <div class="dinner_products"></div>
+        <div class="dinner_disc"></div>
+		<div class="dinner_kkal"></div>
+		<br>
+		<div class="supper">Вечеря - ...</div>
+        <div class="supper_products"></div>
+        <div class="supper_disc"></div>
+		<div class="supper_kkal"></div>
+	</div>
+</div>
+<br>
+<br>
+
+<script type="text/javascript">
+	(() => {
+		async function getSavedMenu(url) {
+			return (await fetch(url)).json();
+		}
+		async function getSavedMenuList(url, params) {
+			return (await fetch(url)).json();
+		} 
+
+		async function displayMenuDays() {
+			let menu = localStorage.getItem("menuPage");
+
+			let savedDataAfter = await getSavedMenu(`http://localhost:3000/getSavedMenuList/menu_${menu}.json`).then((value) => {
+                document.getElementById("mainText").innerText = "Меню_" + value[0]["понеділок/вівторок"]["menuKkal"];
+
+				for (let i = 0; i < value.length; i++) {
+					let portion = " (2 порції)";
+					let koefDay;
+
+					if(i === 0) {
+						dayForMenu = "понеділок/вівторок";
+						koefDay = 2;
+					} else if(i === 1) {
+						dayForMenu = "середу/четвер";
+						koefDay = 2;
+					} else if(i === 2) {
+						dayForMenu = "п'ятницю/суботу";
+						koefDay = 2;
+					} else if(i === 3) {
+						dayForMenu = "неділю";
+						portion = " (1 порція)";
+						koefDay = 1;
+					}
+
+					let breakfast = document.getElementsByClassName("breakfast");
+					let snack = document.getElementsByClassName("snack");
+					let dinner = document.getElementsByClassName("dinner");
+					let supper = document.getElementsByClassName("supper");
+                    let breakfastProducts = document.getElementsByClassName("breakfast_products");
+					let snackProducts = document.getElementsByClassName("snack_products");
+					let dinnerProducts = document.getElementsByClassName("dinner_products");
+					let supperProducts = document.getElementsByClassName("supper_products");
+                    let breakfastDisc = document.getElementsByClassName("breakfast_disc");
+					let snackDisc = document.getElementsByClassName("snack_disc");
+					let dinnerDisc = document.getElementsByClassName("dinner_disc");
+					let supperDisc = document.getElementsByClassName("supper_disc");
+					let breakfastKkal = document.getElementsByClassName("breakfast_kkal");
+					let snackKkal = document.getElementsByClassName("snack_kkal");
+					let dinnerKkal = document.getElementsByClassName("dinner_kkal");
+					let supperKkal = document.getElementsByClassName("supper_kkal");
+
+					if(value[i][dayForMenu]["Сніданок"].recipeName) {
+						breakfast[i].innerText = "Сніданок - " + value[i][dayForMenu]["Сніданок"].recipeName + portion;
+                        let products = value[i][dayForMenu]["Сніданок"].products;
+
+                        for (let index = 0; index < products.length; index++) {
+                            let text = document.createElement("p");
+							text.className = "textProducts";
+							let value = products[index].val * koefDay;
+							text.innerHTML = products[index].prod + " - " + (value).toFixed(2) + products[index].unit;
+                            let breakfastProducts = document.getElementsByClassName("breakfast_products")[i];
+							breakfastProducts.appendChild(text);  
+                        }
+
+                        breakfastDisc[i].innerText = value[i][dayForMenu]["Сніданок"].recipeSummary;
+						breakfastKkal[i].innerText = (value[i][dayForMenu]["Сніданок"].totalKkal).toFixed(2) + "ккал";
+					} else {
+						breakfast[i].innerText = "Сніданок - ..."
+					}
+					if(value[i][dayForMenu]["Перекус"].recipeName) {
+						snack[i].innerText = "Перекус - " + value[i][dayForMenu]["Перекус"].recipeName  + portion;
+                        let products = value[i][dayForMenu]["Перекус"].products;
+                        
+                        for (let index = 0; index < products.length; index++) {
+                            let text = document.createElement("p");
+							text.className = "textProducts";
+							let value = products[index].val * koefDay;
+							text.innerHTML = products[index].prod + " - " + (value).toFixed(2) + products[index].unit;
+                            let snackProducts = document.getElementsByClassName("snack_products")[i];
+							snackProducts.appendChild(text);  
+                        }
+
+                        snackDisc[i].innerText = value[i][dayForMenu]["Перекус"].recipeSummary;
+						snackKkal[i].innerText = (value[i][dayForMenu]["Перекус"].totalKkal).toFixed(2) + "ккал";
+					} else {
+						snack[i].innerText = "Перекус - ...";
+					}
+					if(value[i][dayForMenu]["Обід"].recipeName) {
+						dinner[i].innerText = "Обід - " + value[i][dayForMenu]["Обід"].recipeName  + portion;
+                        let products = value[i][dayForMenu]["Обід"].products;
+                        
+                        for (let index = 0; index < products.length; index++) {
+                            let text = document.createElement("p");
+							text.className = "textProducts";
+							let value = products[index].val * koefDay;
+							text.innerHTML = products[index].prod + " - " + (value).toFixed(2) + products[index].unit;
+                            let dinnerProducts = document.getElementsByClassName("dinner_products")[i];
+							dinnerProducts.appendChild(text);  
+                        }
+
+                        dinnerDisc[i].innerText = value[i][dayForMenu]["Обід"].recipeSummary;
+						dinnerKkal[i].innerText = (value[i][dayForMenu]["Обід"].totalKkal).toFixed(2) + "ккал";
+					} else {
+						dinner[i].innerText = "Обід - ...";
+					}
+					if(value[i][dayForMenu]["Вечеря"].recipeName) {
+						supper[i].innerText = "Вечеря - " + value[i][dayForMenu]["Вечеря"].recipeName + portion;
+                        let products = value[i][dayForMenu]["Вечеря"].products;
+                        
+                        for (let index = 0; index < products.length; index++) {
+                            let text = document.createElement("p");
+							text.className = "textProducts";
+							let value = products[index].val * koefDay;
+							text.innerHTML = products[index].prod + " - " + (value).toFixed(2) + products[index].unit;
+                            let supperProducts = document.getElementsByClassName("supper_products")[i];
+							supperProducts.appendChild(text);  
+                        }
+
+                        supperDisc[i].innerText = value[i][dayForMenu]["Вечеря"].recipeSummary;
+						supperKkal[i].innerText = (value[i][dayForMenu]["Вечеря"].totalKkal).toFixed(2) + "ккал";
+					} else {
+						supper[i].innerText = "Вечеря - ...";
+					}
+				}
+			}).catch(err => {
+				console.log(err)
+			})
+		}
+
+        displayMenuDays();
+
+	})()
+	async function getSavedMenu(url) {
+		return (await fetch(url)).json();
+	}
+
+	// method for search field
+	function searchProducts() {
+		let indexNum;
+		let dots = document.getElementsByClassName("searchBar");
+
+		for (let i = 0; i < dots.length; i++) {
+			dots[i].addEventListener("input", function() { 
+				indexNum = i; // get index of the current product line
+			
+				if(document.getElementById("character" + indexNum)) { // delete the searched product from the input field and options
+					let deleteDiv = document.getElementById("character" + indexNum);
+					let parent = deleteDiv.parentNode;
+					parent.removeChild(deleteDiv);
+
+					if(document.getElementsByClassName("valuefield")[indexNum]) { // clear the kkal input field and grams input field
+						let valueProduct = document.getElementsByClassName("valuefield")[indexNum];
+						valueProduct.value = "";
+						document.getElementById("products" + indexNum).value = "";
+						kkal[indexNum] = 0; // decrease kkal for product
+					}
+				}
+
+				let newDiv = document.createElement("datalist"); // create new datalist
+				newDiv.id = "character" + indexNum;
+				newDiv.style = "display: inline-block;";
+				let currentDiv;
+
+				if(document.getElementById("products" + indexNum)) {
+					currentDiv = document.getElementById("products" + indexNum);
+				} else {
+					currentDiv = document.getElementsByClassName("products0" + indexNum);
+				}
+					
+				currentDiv.appendChild(newDiv);
+
+				for (let key in productsList) {
+					let inputValue = document.getElementsByClassName("searchBar")[indexNum].value;
+					inputValue = inputValue.toLowerCase();
+
+					if(productsList[key].name.includes(inputValue) && inputValue !== "" && inputValue !== " ") { // create options with seached products
+						let option = document.createElement("option");
+						option.className = "options";
+						option.value = productsList[key].name;
+						let currentDiv0 = document.getElementById("character" + indexNum);
+				  		currentDiv0.appendChild(option); 
+					}
+				}
+			});
+		}
+	}
+
+	async function getData(url) {
+		return (await fetch(url)).json();
+	}
+
+	function searchMeal() {
+		let search = document.getElementById("search");
+		localStorage.setItem('recipeName', document.getElementById("search").value);
+
+		if(document.getElementById("theList")) { // delete the searched product from the input field and options
+			let deleteDiv = document.getElementById("theList");
+			let parent = deleteDiv.parentNode;
+			parent.removeChild(deleteDiv);
+		}
+
+		async function getDataMenu(url) {
+			return (await fetch(url)).json();
+		}
+
+		let savedDataAfter = getData('http://localhost:3000/get').then((value) => {
+			let newDiv = document.createElement("datalist"); // create new datalist 
+			newDiv.id = "theList";
+			newDiv.style = "display: inline-block;";
+			let currentDiv = document.getElementById("search");
+			currentDiv.appendChild(newDiv);
+			search = search.value;
+			inputValue = search.toLowerCase();
+					
+			for (let i = 0; i < value.length; i++) {
+				let recipeName = value[i].recipeName;
+
+				if(recipeName) {
+					let recipeNameLowCase = recipeName.toLowerCase();
+								
+					if(recipeNameLowCase.includes(inputValue)) { // create options with seached products
+						let option = document.createElement("option"); 
+						option.className = "liList";
+						option.value = recipeName;
+						let currentDiv0 = document.getElementById("theList");
+						currentDiv0.appendChild(option);
+					}
+				}	
+			}
+		})
+	}
+
+	async function saveSearchResult() {
+		localStorage.setItem('recipeName', document.getElementById("search").value).then(() => {
+			window.location.href = "./singlePage.html";
+		});
+	}
+
+</script>
+</body>
+</html>

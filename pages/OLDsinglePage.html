@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>menu</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+	<link href="https://fonts.cdnfonts.com/css/apercu" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+	<script type="text/javascript" src="../db/productsList.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script>
+	<style type="text/css">
+
+		body {
+			margin-left: 18px;
+			font-family: 'Apercu', sans-serif;
+		}
+
+
+		#logo {
+			padding: 1%;
+			width: 200px;
+		}
+
+		#header input[type=text] {
+		    padding: 6px;
+		    margin-top: 7%;
+		    font-size: 17px;
+		    border: 1px solid #ccc;
+		    width: 300px;
+		}
+
+		#header .search-container button {
+			background: #ccc;
+			float: right;
+			padding: 6px 10px;
+			margin-top: 7%;
+			margin-right: 10px;
+			background: #ddd;
+			font-size: 17px;
+			border: 1px solid #ccc;
+			cursor: pointer;
+		}
+
+		#header .search-container {
+		    float: right;
+		}
+
+		#header .search-container label {
+			font-size: 17px;
+		}
+
+		#header .checkboxSearch {
+            width: 15px;
+            height: 15px;
+        }
+
+		hr {
+			width: 100%;
+		}
+
+		#nav {
+            list-style: none inside;
+            margin: 0 -10px 0 0px;
+            padding: 0;
+            text-align: center;
+        }
+
+        #nav li {
+            display: block;
+            position: relative;
+            float: left;
+            background: white;
+            font-size: 26px;
+			z-index: 1;
+        }
+
+        #nav li ul {
+        	margin-right: 10px;
+        	margin-left: 10px;
+        }
+
+        #nav li a {
+            display: block;
+            padding-left: 10px;
+            margin-right: 40px;
+            line-height: 35px;
+            color: #800080;
+        }
+
+        #nav li li a {
+            font-size: 18px;
+        }
+
+        #nav li:hover {
+            background: white;
+            font-size: 26px;
+        }
+
+        #nav ul {
+            position: absolute;
+            padding: 0;
+            display: none;
+            box-shadow: 1px 1px 1px 1px grey;
+        }
+
+        #nav li:hover ul ul {
+            display: none;
+        }
+
+        #nav li:hover ul {
+            display: block;
+            background: white;
+        }
+
+        #nav li li:hover ul {
+        	position: relative;
+            display: block;
+        }
+
+		a {
+			text-decoration: none;
+		}
+
+		#mainText {
+			font: 40px black;
+			font-family: 'Apercu', sans-serif;
+			text-align: center;
+			color: #ff914d;
+			width: 75%;
+		}
+
+		.mainContent {
+			display: inline-block;
+			max-width: 100%;
+			margin-bottom: 60px;
+		}
+
+		label {
+			font: 18px black;
+		}
+
+		.skeleton {
+		    float: left;
+			max-width: 50%;
+		    height: 370px;
+		    padding: 0;
+		    margin: 0 20px 0 0;
+		}
+
+		.skeleton-r {
+			width: 770px;
+		    height: 370px;
+		    float: right;
+		    margin-left: 4.2vw;
+		    /* margin: 0 20px 0 0; */
+		    box-shadow: 1px 1px 1px 1px grey;
+		}
+
+		#productsRow {
+			float: left;
+		    width: 494px;
+		    padding: 0;
+			height: 370px;
+		}
+
+		.container:after, .products:after, #descriptionDiv, #divButton {
+		    content: "";
+		    display: table;
+		    clear: both;
+		}
+
+		.skeleton-left, .skeleton-right {
+			width: 494px;
+		    height: 370px;
+		    background: rgba(130, 130, 130, 0.2);
+		    background-size: 800px 100px;
+		}
+
+		.line {
+			margin: 0 0 15px 0;
+			height: 35px;
+		    background: rgba(130, 130, 130, 0.2);
+		    background-size: 800px 100px;
+			font-size: 25px;
+			color: black;
+		}
+
+		.addToMenu {
+			text-decoration: none;
+			width: 200px;
+			height: 58px;
+			border-radius: 15px;
+			border-color: #00bf63;
+			font-size: 18px;
+			text-align: center;
+			background: linear-gradient(#00bf63, #c1ff72);
+			margin-top: 15px;
+			color: black;
+		}
+
+		.kkal {
+			font-size: 22px;
+			float: left;
+			padding-right: 10px;
+		}
+
+		#kkalAmount {
+			font-size: 22px;
+			float: left;
+			color: #ff914d;
+			padding-right: 10px;
+		}
+
+		#square {
+		    height: 100%;
+			width: 100%;
+		}
+
+		#descriptionDiv, #divButton {
+			width: 70%;
+			float: left;
+			padding: 0;
+			margin: 0; 
+		}
+
+		.titleSidebar {
+			font-size: 23px;
+			color: #00bf63;
+			margin: 20px 30px 15px 15px;
+		}
+
+		.titleSidebarDay {
+			font-size: 22px;
+			color: #800080;
+		}
+
+		.day {
+			margin-left: 15px;
+			padding-bottom: 10px;
+		}
+
+		.dayText {
+			font-size: 18px;
+			color: black;
+			margin-left: 15px;
+		}
+
+		.modalDay {
+			display: inline-block;
+		}
+
+		.recipeModalName {
+			display: inline-block;
+		}
+
+		.foodName {
+			display: inline-block;
+		}
+
+		#rightSidebar {
+			position: fixed;
+			margin-left: 75%;
+			width: 25%;
+			height: 600px;
+		}
+	</style>
+</head>
+<body>
+<div id="header">
+	<img id="logo" src="../img/logo.png" onclick="javascript:location.href='./index.html';">
+	<form class="search-container">
+		<input type="text" id="search" placeholder="Пошук ..." list="theList" oninput="searchMeal();">
+		<button type="submit" id="searchBtn"><a class="fa fa-search" onclick="saveSearchResult();"></a></button>
+		<div>
+			<br>
+			<input type="checkbox" id="recipeCheckbox" name="recipeCheckbox" class="checkboxSearch" checked disabled>
+			<label for="recipeCheckbox">Пошук по страві</label>
+			<input type="checkbox" id="productCheckbox" name="productCheckbox" class="checkboxSearch">
+			<label for="productCheckbox">Пошук по інгредіентам</label>
+		</div>
+	</form>
+</div>
+<hr>
+<ul id="nav">
+	<li><a href="./index.html" onclick="saveClickData('Рецепти')">Рецепти</a>
+		<ul>
+			<li><a href="./index.html" onclick="saveClickData('Сніданок')">Сніданок</a></li>
+			<li><a href="./index.html" onclick="saveClickData('Перекус')">Перекус</a></li>
+			<li><a href="./index.html" onclick="saveClickData('Обід')">Обід</a>
+			<li><a href="./index.html" onclick="saveClickData('Вечеря')">Вечеря</a></li>
+			<li><a href="./index.html" onclick="saveClickData('Свято')">Свято</a></li>
+		</ul>
+	</li>
+	<li><a href="./addRecipe.html">Додати рецепт</a></li>
+	<li><a href="./calculateKkal.html">Розрахунок калорій</a></li>
+	<li><a href="./saveMenu.html">Зберегти меню</a></li>
+	<li><a href="./saveMenuChildren.html">Зберегти меню для сім'ї</a></li>
+	<li><a href="./archiveMenu.html">Архів меню</a></li>
+	<li><a href="./archiveFamilyMenu.html">Архів сімейного меню</a></li>
+</ul>
+<br>
+<br>
+<hr>
+<div id="rightSidebar">
+	<div id="sideBar">
+		<p class="titleSidebar">Cбережені страви для меню</p>
+		<div class="day">
+			<div class="titleSidebarDay" onclick="expandDay(0)">Понеділок та Вівторок</div>
+			<div class="breakfast">Сніданок - ...</div>
+			<div class="snack">Перекус - ...</div>
+			<div class="dinner">Обід - ...</div>
+			<div class="supper">Вечеря - ...</div>
+		</div>
+		<div class="day">
+			<div class="titleSidebarDay" onclick="expandDay(1)">Середа та Четвер</div>
+			<div class="breakfast">Сніданок - ...</div>
+			<div class="snack">Перекус - ...</div>
+			<div class="dinner">Обід - ...</div>
+			<div class="supper">Вечеря - ...</div>
+		</div>
+		<div class="day">
+			<div class="titleSidebarDay" onclick="expandDay(2)">П'ятниця та Субота</div>
+			<div class="breakfast">Сніданок - ...</div>
+			<div class="snack">Перекус - ...</div>
+			<div class="dinner">Обід - ...</div>
+			<div class="supper">Вечеря - ...</div>
+		</div>
+		<div class="day">
+			<div class="titleSidebarDay" onclick="expandDay(3)">Неділя</div>	
+			<div class="breakfast">Сніданок - ...</div>
+			<div class="snack">Перекус - ...</div>
+			<div class="dinner">Обід - ...</div>
+			<div class="supper">Вечеря - ...</div>	
+		</div>
+		<button class="addToMenu" onclick="savePreparedMenu();">Зберегти меню</button>
+	</div>
+</div>
+<p id="mainText"></p>
+	<div class="mainContent">
+		<div clas="container">	
+			<div class="skeleton">
+				<div class="skeleton-left">
+					<img id="square">
+				</div>
+			</div>
+			<div class="skeleton">
+				<div class="skeleton-right">
+					<div class="products">
+						<div id="productsRow"></div>
+					</div>
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="descriptionDiv">
+		<div id="discription"></div>
+		<br>
+		<br>
+		<div class="totalKkal">
+			<div class="kkal">Загальна калорійність блюда (1 порція)</div>
+			<div id="kkalAmount">.....</div>
+			<div class="kkal">      ккал</div>
+		</div>
+	</div>
+	<div id="divButton">
+		<button class="addToMenu" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Додати до меню</button>
+	</div>
+</div>
+
+<!-- Menu modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Меню</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<div style="display: inline-block;">Додати, як </div>
+			<select class="food" style="display: inline-block;">
+				<option disabled selected>Обрати прийом їжи</option>
+				<option>Сніданок</option>
+				<option>Перекус</option>
+				<option>Обід</option>
+				<option>Вечеря</option>
+			</select>
+		  <div style="display: inline-block;">у</div>
+			<select class="daySelect" style="display: inline-block;">
+				<option disabled selected>Обрати день</option>
+				<option>понеділок/вівторок</option>
+				<option>середу/четвер</option>
+				<option>п'ятницю/суботу</option>
+				<option>неділю</option>
+			</select>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary" onclick="saveRecipe()">Save changes</button>
+		</div>
+	  </div>
+	</div>
+</div>
+
+<!-- Confirm modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="confirmModalLabel">Рецепт додан до меню</h5>
+		  	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="updateRecipe()"></button>
+		</div>
+	  </div>
+	</div>
+</div>
+
+<!-- Confirm modal for successful saving menu-->
+<div class="modal fade" id="confirmModalSaveMenu" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="confirmModalLabel">Mеню збережено</h5>
+		  	<button type="button" class="btn-close" id="closeMadal" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+	  </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	(() => {
+		async function getData(url) {
+			return (await fetch(url)).json();
+		} 
+
+		async function displayData() {
+			let name = document.getElementById("mainText");
+			name.textContent = localStorage.getItem("recipeName");
+			let step = false;
+
+			let savedDataAfter = await getData('http://localhost:3000/get').then((value) => {
+				for (let i = 0; i < value.length; i++) {
+					let recipeName = value[i].recipeName;
+						
+					if(recipeName === name.textContent && step === false) {
+						step = true;
+
+						//img
+						document.getElementById("square").setAttribute('src', value[i].imgData);
+
+						// kkal
+						let kkal = document.getElementById("kkalAmount");
+						let kkalAmount = value[i];
+						kkal.innerHTML = kkalAmount.totalKkal.toFixed(2);
+
+						// products for recipe
+						let products = document.getElementById("productsRow");
+						products.style = "background-color: white;"
+						let productsList = value[i];
+
+						for(let j = 0; j < productsList.products.length; j++) {
+							let text = document.createElement("p");
+							text.className = "textProducts";
+							text.innerHTML = productsList.products[j].prod + " - " + productsList.products[j].val + " " + productsList.products[j].unit;
+							products.appendChild(text);
+						}
+
+						// description
+						let description = document.getElementById("discription");
+						let descBlock = value[i];
+						description.innerHTML = descBlock.recipeSummary;
+					}
+				}
+			})
+		}
+
+		displayData();
+		displaySavedMenu();
+
+		var myModal = bootstrap.Modal.getOrCreateInstance(document.getElementById("confirmModal"));
+		myModal.hide();
+
+		var myModalSave = bootstrap.Modal.getOrCreateInstance(document.getElementById("confirmModalSaveMenu"));
+		myModal.hide();
+
+		function displaySavedMenu() {
+			let savedData = getDataMenu('http://localhost:3000/getMenu').then((value) => {
+				let textmenuBreakfast = document.getElementsByClassName("breakfast");
+				let textmenuSnack = document.getElementsByClassName("snack");
+				let textmenuDinner = document.getElementsByClassName("dinner");
+				let textmenuSupper = document.getElementsByClassName("supper");
+
+				for (let i = 0; i < value.length; i++) {
+					if(i === 0) {
+						dayForMenu = "понеділок/вівторок";
+					} else if(i === 1) {
+						dayForMenu = "середу/четвер";
+					} else if(i === 2) {
+						dayForMenu = "п'ятницю/суботу";
+					} else if(i === 3) {
+						dayForMenu = "неділю";
+					}
+					if(value[i][dayForMenu]["Сніданок"].recipeName) {
+						textmenuBreakfast[i].innerHTML = "Сніданок - " + value[i][dayForMenu]["Сніданок"].recipeName;
+					} else {
+						textmenuBreakfast[i].innerHTML = "Сніданок - ...";
+					}
+					
+					if(value[i][dayForMenu]["Перекус"].recipeName) {
+						textmenuSnack[i].innerHTML = "Перекус - " + value[i][dayForMenu]["Перекус"].recipeName;
+					} else {
+						textmenuSnack[i].innerHTML = "Перекус - ...";
+					}
+					
+					if(value[i][dayForMenu]["Обід"].recipeName) {
+						textmenuDinner[i].innerHTML = "Обід - " + value[i][dayForMenu]["Обід"].recipeName;
+					} else {
+						textmenuDinner[i].innerHTML = "Обід - ...";
+					}
+					
+					if(value[i][dayForMenu]["Вечеря"].recipeName) {
+						textmenuSupper[i].innerHTML = "Вечеря - " + value[i][dayForMenu]["Вечеря"].recipeName;
+					} else {
+						textmenuSupper[i].innerHTML = "Вечеря - ...";
+					}					
+				}
+			})
+		}	
+	})()
+
+	async function getData(url) {
+		return (await fetch(url)).json();
+	}
+
+	async function getDataMenu(url) {
+		return (await fetch(url)).json();
+	}
+
+	function updateRecipe() {
+		displaySavedMenu();
+	}
+
+	function displaySavedMenu() {
+		let savedData = getDataMenu('http://localhost:3000/getMenu').then((value) => {
+			let textmenuBreakfast = document.getElementsByClassName("breakfast");
+			let textmenuSnack = document.getElementsByClassName("snack");
+			let textmenuDinner = document.getElementsByClassName("dinner");
+			let textmenuSupper = document.getElementsByClassName("supper");
+
+			for (let i = 0; i < value.length; i++) {
+				if(i === 0) {
+					dayForMenu = "понеділок/вівторок";
+				} else if(i === 1) {
+					dayForMenu = "середу/четвер";
+				} else if(i === 2) {
+					dayForMenu = "п'ятницю/суботу";
+				} else if(i === 3) {
+					dayForMenu = "неділю";
+				}
+				if(value[i][dayForMenu]["Сніданок"].recipeName) {
+					textmenuBreakfast[i].innerHTML = "Сніданок - " + value[i][dayForMenu]["Сніданок"].recipeName;
+				} else {
+					textmenuBreakfast[i].innerHTML = "Сніданок - ...";
+				}
+				
+				if(value[i][dayForMenu]["Перекус"].recipeName) {
+					textmenuSnack[i].innerHTML = "Перекус - " + value[i][dayForMenu]["Перекус"].recipeName;
+				} else {
+					textmenuSnack[i].innerHTML = "Перекус - ...";
+				}
+				
+				if(value[i][dayForMenu]["Обід"].recipeName) {
+					textmenuDinner[i].innerHTML = "Обід - " + value[i][dayForMenu]["Обід"].recipeName;
+				} else {
+					textmenuDinner[i].innerHTML = "Обід - ...";
+				}
+				
+				if(value[i][dayForMenu]["Вечеря"].recipeName) {
+					textmenuSupper[i].innerHTML = "Вечеря - " + value[i][dayForMenu]["Вечеря"].recipeName;
+				} else {
+					textmenuSupper[i].innerHTML = "Вечеря - ...";
+				}					
+			}
+		})
+	}
+
+	// save recipe to menu
+	async function saveRecipe() {
+		let name = document.getElementById("mainText");
+		name.textContent = localStorage.getItem("recipeName");
+
+		let savedDataAfter = await getData('http://localhost:3000/get').then((value) => {
+			for (let i = 0; i < value.length; i++) {
+				let recipeName = value[i].recipeName;
+		 		if(recipeName === name.textContent) {
+
+					let saveFood = {
+						topic: value[i].topic,
+						recipeName: value[i].recipeName,
+						checkboxVal: value[i].checkboxVal,
+						imgData: value[i].imgData,
+						products: value[i].products,
+						totalKkal: value[i].totalKkal, 
+						recipeSummary: value[i].recipeSummary
+					}
+
+					localStorage.setItem("recipe", JSON.stringify(saveFood));
+		 		}
+			}
+		})
+
+		let savedData = await getDataMenu('http://localhost:3000/getMenu').then((value) => {
+			let save = JSON.parse(localStorage.getItem("recipe"));
+			let day = document.getElementsByClassName("daySelect")[0];
+			let daySelected = day.options[day.selectedIndex].text;
+			let food = document.getElementsByClassName("food")[0];
+			let foodSelected = food.options[food.selectedIndex].text;
+
+			let i;
+
+			if(daySelected === "понеділок/вівторок") {
+				i = 0;
+			} else if(daySelected === "середу/четвер") {
+				i = 1;
+			} else if(daySelected === "п'ятницю/суботу") {
+				i = 2;
+			} else if(daySelected === "неділю") {
+				i = 3;
+			}
+
+			value[i][daySelected][foodSelected] = save;
+			
+			const saveOp = fetch('http://localhost:3000/saveMenu', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(value)
+			});
+		})
+
+		await updateRecipe();
+
+		let myModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('exampleModal'));
+		myModal.hide();
+
+		let modalConf = bootstrap.Modal.getOrCreateInstance(document.getElementById("confirmModal"));
+		modalConf.show();
+	}
+
+	async function getDataMenu(url) {
+		return (await fetch(url)).json();
+	}
+
+	async function searchMeal() {
+		let search = document.getElementById("search");
+		localStorage.setItem('recipeName', document.getElementById("search").value);
+
+		if(document.getElementById("theList")) { // delete the searched product from the input field and options
+			let deleteDiv = document.getElementById("theList");
+			let parent = deleteDiv.parentNode;
+			parent.removeChild(deleteDiv);
+		}
+
+		let savedDataAfter = await getData('http://localhost:3000/get').then((value) => {
+			let newDiv = document.createElement("datalist"); // create new datalist 
+			newDiv.id = "theList";
+			newDiv.style = "display: inline-block;";
+			let currentDiv = document.getElementById("search");
+			currentDiv.appendChild(newDiv);
+			search = search.value;
+			inputValue = search.toLowerCase();
+					
+			for (let i = 0; i < value.length; i++) {
+				let recipeName = value[i].recipeName;
+
+				if(recipeName) {
+					let recipeNameLowCase = recipeName.toLowerCase();
+								
+					if(recipeNameLowCase.includes(inputValue)) { // create options with seached products
+						let option = document.createElement("option"); 
+						option.className = "liList";
+						option.value = recipeName;
+						let currentDiv0 = document.getElementById("theList");
+						currentDiv0.appendChild(option);
+					}
+				}	
+			}
+		})
+	}
+
+	async function saveSearchResult() {
+		localStorage.setItem('recipeName', document.getElementById("search").value).then(() => {
+			window.location.href = "./singlePage.html";
+		});
+	}
+
+	// save menu
+	async function savePreparedMenu() {
+		let savedData = await getDataMenu('http://localhost:3000/getMenu').then((value) => {
+			value[0]["понеділок/вівторок"]["menuKkal"] = "";
+			const saveOp = fetch('http://localhost:3000/saveFullMenu', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(value)
+			});
+			var myModal = bootstrap.Modal.getOrCreateInstance(document.getElementById("confirmModalSaveMenu"));
+			myModal.show();
+		})
+
+		let val = [
+			{"понеділок/вівторок": {
+				"Сніданок": {},
+				"Перекус": {},
+				"Обід": {},
+				"Вечеря": {}
+			}},
+			{"середу/четвер": {
+				"Сніданок": {},
+				"Перекус": {},
+				"Обід": {},
+				"Вечеря": {}
+			}},
+			{"п'ятницю/суботу": {
+				"Сніданок": {},
+				"Перекус": {},
+				"Обід": {},
+				"Вечеря": {}
+			}},
+			{"неділю": {
+				"Сніданок": {},
+				"Перекус": {},
+				"Обід": {},
+				"Вечеря": {}
+			}}
+		]
+		const saveOp = fetch('http://localhost:3000/saveMenu', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(val)
+		});
+
+		let textmenuBreakfast = document.getElementsByClassName("breakfast");
+		let textmenuSnack = document.getElementsByClassName("snack");
+		let textmenuDinner = document.getElementsByClassName("dinner");
+		let textmenuSupper = document.getElementsByClassName("supper");
+
+		for (let i = 0; i < 4; i++) {
+			textmenuBreakfast[i].innerHTML = "Сніданок - ...";
+			textmenuSnack[i].innerHTML = "Перекус - ...";
+			textmenuDinner[i].innerHTML = "Обід - ...";
+			textmenuSupper[i].innerHTML = "Вечеря - ...";					
+		}
+	}
+
+</script>
+</body>
+</html>

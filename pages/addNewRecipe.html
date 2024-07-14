@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Menu</title>
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+        <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+        <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet"> -->
+        <link rel="stylesheet" href="../css/header.css">
+        <link rel="stylesheet" href="../css/addNewRecipe.css">
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous"> -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.min.js" integrity="sha384-heAjqF+bCxXpCWLa6Zhcp4fu20XoNIA98ecBC1YkdXhszjoejr5y9Q77hIrv8R9i" crossorigin="anonymous"></script> -->
+        <!-- <script type="text/javascript" src="../db/productsList.js"></script> -->
+        <!-- <script type="text/javascript" src="../js/index.js"></script> -->
+        <!-- <script type="text/javascript" src="../js/registration.js"></script> -->
+    </head>
+    <body>
+        <header>
+            <img id="logo" src="../img/logo.png" onclick="javascript:location.href='./index.html';">
+            <div id="rightSideHeader">
+                <div id="searchContainer">
+                    <div id="searchDiv">
+                        <input type="text" id="searchField" placeholder=" Search ..." list="theList" oninput="searchMeal();">
+                    </div>
+                    <div id="searchBtn" href="./singlePage.html" onclick="saveSearchResult();">
+                      <img id="searchImg" src="../img/search.png" alt="Пошук">
+                    </div>
+                </div>
+                <div id="searchCheckbox">
+                    <input type="checkbox" id="recipeCheckbox" class="checkboxSearch" name="recipeCheckbox" checked disabled>
+                    <label for="recipeCheckbox">Search by food name</label>
+                    <input type="checkbox" id="productCheckbox" class="checkboxSearch" name="productCheckbox" disabled>
+                    <label for="productCheckbox">Search by ingredients</label>
+                </div>
+            </div>
+            <div id="mobileMenu">
+                <img id="menu" src="../img/menu.png">
+                <nav>
+                    <li><a href="./index.html" onclick="displayPagination('Рецепти', 0); displayRecipes(0, 'Рецепти')">Recipes</a>
+                        <ul class="mealWrapperNav">
+                            <li><a href="#" onclick="displayPagination('Сніданок', 0); displayRecipes(0, 'Сніданок')">Breakfast</a></li>
+                            <li><a href="#" onclick="displayPagination('Перекус', 0); displayRecipes(0, 'Перекус')">Snack</a></li>
+                            <li><a href="#" onclick="displayPagination('Обід', 0); displayRecipes(0, 'Обід')">Dinner</a>
+                            <li><a href="#" onclick="displayPagination('Вечеря', 0); displayRecipes(0, 'Вечеря')">Supper</a></li>
+                            <li><a href="#" onclick="displayPagination('Свято', 0); displayRecipes(0, 'Свято')">Holiday</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="./addRecipe.html">Add a recipe</a></li>
+                    <li><a href="./calculateKkal.html">Create a menu</a></li>
+                    <li><a href="./archiveMenu.html">Archive of menus</a></li>
+                </nav>
+            </div>
+        </header>
+        <hr>
+        <nav>
+            <li><a href="./index.html" onclick="displayPagination('Рецепти', 0); displayRecipes(0, 'Рецепти')">Recipes</a>
+                <ul class="mealWrapperNav">
+                    <li><a href="#" onclick="displayPagination('Сніданок', 0); displayRecipes(0, 'Сніданок')">Breakfast</a></li>
+                    <li><a href="#" onclick="displayPagination('Перекус', 0); displayRecipes(0, 'Перекус')">Snack</a></li>
+                    <li><a href="#" onclick="displayPagination('Обід', 0); displayRecipes(0, 'Обід')">Dinner</a>
+                    <li><a href="#" onclick="displayPagination('Вечеря', 0); displayRecipes(0, 'Вечеря')">Supper</a></li>
+                    <li><a href="#" onclick="displayPagination('Свято', 0); displayRecipes(0, 'Свято')">Holiday</a></li>
+                </ul>
+            </li>
+            <li><a href="./addRecipe.html">Add a recipe</a></li>
+            <li><a href="./calculateKkal.html">Create a menu</a></li>
+            <li><a href="./archiveMenu.html">Archive of menus</a></li>
+        </nav>
+        <hr>
+        <h1 id="mainText">Add new recipe</h1>
+        <main>
+            <container id="leftSidebar">
+                <div class="containerName">Day types of food</div>
+            </container>
+            <container id="mainContent">
+                <div class="container">
+                    <label for="selectFoodType">Тема *</label>
+                    <br>
+                    <select id="selectFoodType" name="selectFoodType">
+                        <option disabled selected>Обрати тему</option>
+                        <option value="Сніданок">Сніданок</option>
+                        <option value="Перекус">Перекус</option>
+                        <option value="Обід">Обід</option>
+                        <option value="Вечеря">Вечеря</option>
+                        <option value="Обід">Свято</option>
+                    </select>
+                    <br>
+                    <br>
+                    <label for="foodName">Назва страви *</label>
+                    <br>
+                    <input id="foodName" name="foodName" type="text" size="100" value="">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <label for="img">Завантажити посилання на фотографію готової страви. Посилання на сайт <a href="https://ru.imgbb.com/">https://ru.imgbb.com/</a> (взяти посилання из Консоли). </label>
+                    <br>
+                    <input type="text" id="img" name="img"  size="100">
+                    <br>
+                    <br>
+                    <label for="recipeProduct">Продукт</label>
+                    <br>
+                    <input name="recipeProduct" class="searchBar" list="character0" type="search" placeholder="Продукт" style="width: 33%; margin-right: -0.5px;" oninput="searchProducts()"></input>
+                    <select class="unitValue" style="display: inline-block; padding: 0.8px;">
+                        <option value="гр" selected>гр</option>
+                        <option value="мл">мл</option>
+                        <option value="шт">шт</option>
+                    </select>
+                    <input class="valuefield" style="width: 5%; margin-right: 0%;" type="text" oninput="calculateKkal()">
+                    <input id="products0" class="valueKkal" type="text" placeholder = "Калорійність" style="width: 5%; display: inline-block; margin-right: 10vm;">
+                    <br>
+                    <br>
+                    <br id="addNewText">
+                    <button id="addProductButton" style="width: 30px; height: 30px;" onclick="addNewProduct()" type="button">+</button>	
+                    <br>
+                    <br>
+                    <div>ЗАГАЛЬНА КАЛОРІЙНІСТЬ БЛЮДА:
+                        <button onclick="kkalFood()" type="button">Розрахунок</button>
+                        <input id="menuInput" type="text" style="width: 10%; display: inline-block; margin-right: 2%;">
+                    </div>
+                    <br>
+                    <br>
+                    <label for="foodSummary">Текстовий опис приготування страви *</label>
+                    <br>
+                    <textarea id="foodSummary" name="foodSummary" rows="10" cols="100"></textarea>
+                    <br>
+                    <br>
+                    <button id="result" type="button" onclick="saveMenu()">Зберегти</button>
+                    <br>
+                    <br>
+                    <div id="errorMessage"></div>
+                    <div id="successMessage"></div>
+
+                </div>
+            </container>
+            <!-- <container id="rightSidebar">
+                <div class="containerName">Choose a recipe
+                    <img src="" alt="add recipe" onclick="">
+                </div>
+            </container> -->
+        </main>
+</body>
+</html>
