@@ -4,7 +4,7 @@ const Router = require("koa-router");
 const router = new Router();
 const body = require("koa-bodyparser");
 const cors = require("@koa/cors");
-const { checkForWork, saveData, saveDataMenu, saveNewMenu, updateMenu, saveProducrsList, getData, getDataMenu, getSavedMenu, getSavedMenuList, getChildrenSavedMenu,getSavedList } = require("../modules/storage.js");
+const { checkForWork, getData, getDataProducts, saveData } = require("../modules/storage.js");
 
 app.use(body());
 app.use(cors());
@@ -22,18 +22,19 @@ const fetch = (handler) => {
 };
 
 // ROUTERS =============================================
-router.get(`/`, fetch(checkForWork));
+router.get(`/getDataProducts`, fetch(getDataProducts));
+// router.get(`/`, fetch(checkForWork));
 router.post(`/save`, fetch(saveData));
-router.post(`/saveMenu`, fetch(saveDataMenu));
-router.post(`/saveFullMenu`, fetch(saveNewMenu));
-router.post(`/updateMenu/:path`, fetch(updateMenu));
-router.post(`/saveProducrsList/:path`, fetch(saveProducrsList));
+// router.post(`/saveMenu`, fetch(saveDataMenu));
+// router.post(`/saveFullMenu`, fetch(saveNewMenu));
+// router.post(`/updateMenu/:path`, fetch(updateMenu));
+// router.post(`/saveProducrsList/:path`, fetch(saveProducrsList));
 router.get(`/get`, fetch(getData));
-router.get(`/getMenu`, fetch(getDataMenu));
-router.get(`/getSavedMenu`, fetch(getSavedMenu));
-router.get(`/getSavedMenuList/:path`, fetch(getSavedMenuList));
-router.get(`/getChildrenSavedMenu`, fetch(getChildrenSavedMenu));
-router.get(`/getSavedList/:path`, fetch(getSavedList));
+// router.get(`/getMenu`, fetch(getDataMenu));
+// router.get(`/getSavedMenu`, fetch(getSavedMenu));
+// router.get(`/getSavedMenuList/:path`, fetch(getSavedMenuList));
+// router.get(`/getChildrenSavedMenu`, fetch(getChildrenSavedMenu));
+// router.get(`/getSavedList/:path`, fetch(getSavedList));
 // =====================================================
 
 app.use(router.routes());
