@@ -12,6 +12,13 @@ h1 {
     color: #ff914d;
 }
 
+#addIcon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
+
 #mainText {
     text-align: center;
     font-family: "Caveat", cursive;
@@ -25,30 +32,47 @@ main {
     align-self: center;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 2rem;
+    gap: 2%;
 }
 
 .containerName {
+    align-content: center;
+    flex-direction: column;
     font-size: 1.5rem;
     color: #800080;
     font-weight: bold;
 }
 
-#leftSidebar {
+.mealName {
+    font-size: 1.5rem;
+    color: #00bf63;
+    font-weight: bold;
+}
+
+#leftSidebar, #rightSidebar {
     width: 20%;
 }
 
-#mainContent {
- width: 80%;
+#rightSidebarDiv {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 92%;
+    border: 1px dashed;
+    background-color:#FFF4E2;
 }
 
-#productsDiv {
+#mainContent {
+    width: 56%;
+}
+
+.productsDiv {
     display: flex;
     flex-direction: column;
     height: 20%;
     border: 1px dashed;
-    background-color:#FFF4E2
+    background-color:#FFF4E2;
+    margin-bottom: 2rem;
 }
 
 #productsList {
@@ -73,6 +97,7 @@ main {
     border-radius: 1rem;
     border-color: #00bf63;
     text-decoration: none;
+    margin-bottom: 1.5rem;
 }
 
 .food {

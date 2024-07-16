@@ -168,12 +168,14 @@ async function removeFood(deleteNum, unblockNum) {
     parent.removeChild(deleteDiv);
 
     let typesFood = document.getElementsByClassName("food")[unblockNum];
-    typesFood.style = "background-color: #ff914d28;";
+    typesFood.style = "background-color: #FFF4E2;";
     count[unblockNum] = false;
 }
 
 // method to save ready recipe
 async function saveRecipe() {
+    document.getElementById("successMessage").innerText = "";
+
     let topic = document.getElementById("selectFoodType").value;
     let recipeName = document.getElementById("foodName").value;
 	let imgLink = document.getElementById("img").value;
@@ -181,7 +183,7 @@ async function saveRecipe() {
     let food = document.getElementsByClassName("productsSelect");
 
     if (topic === "Обрати тему" || recipeName === "" || imgLink === 0 || foodSummary === "") {
-    	document.getElementById("errorMessage").innerText = "Обов'якові поля не заповнені!"
+    	document.getElementById("errorMessage").innerText = "Fill the required fields!"
     } else {
         document.getElementById("errorMessage").innerText = "";
 
@@ -204,5 +206,7 @@ async function saveRecipe() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(foods),
         });
+
+        document.getElementById("successMessage").innerText = "The recipe is saved";
     }
 }

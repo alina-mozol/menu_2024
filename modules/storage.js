@@ -1,7 +1,7 @@
 const fs = require("fs");
 const DB_PATH = `${__dirname}/../db/recipes.json`;
 const DB_PATH_PRODUCTS = `${__dirname}/../db/products.json`;
-// const DB_PATH_MENU = `${__dirname}/../db/menu.json`;
+const DB_PATH_MENU = `${__dirname}/../db/menu.json`;
 // const DB_PATH_MENU_CHILD = `${__dirname}/../db/menu_child.json`;
 // const DB_PATH_LIST = `${__dirname}/../db/menu_list.json`;
 // const DB_PATH_LIST_CHILDREN = `${__dirname}/../db/menu_list_children.json`;
@@ -24,13 +24,12 @@ const saveData = async ({
     return { status: "Saved" };
 }
 
-// const saveDataMenu = async ({
-//     request,
-//   }) => {
-//     fs.writeFileSync(DB_PATH_MENU, JSON.stringify(request.body, null, 2));
-//     fs.writeFileSync(DB_PATH_MENU_CHILD, JSON.stringify(request.body, null, 2));
-//     return { status: "Saved" };
-// }
+const saveDataMenu = async ({
+    request,
+  }) => {
+    fs.writeFileSync(DB_PATH_MENU, JSON.stringify(request.body, null, 2));
+    return { status: "Saved" };
+}
 
 // const updateMenuList = async (num) => {
 //     let menuList = JSON.parse(await fs.readFileSync(DB_PATH_LIST));
@@ -126,7 +125,7 @@ const checkForWork = () => {
 module.exports = {
     getDataProducts,
     saveData,
-    // saveDataMenu,
+    saveDataMenu,
     // saveNewMenu,
     // updateMenu,
     // saveProducrsList,
