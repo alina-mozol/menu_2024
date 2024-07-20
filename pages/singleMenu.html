@@ -7,12 +7,15 @@
         <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
         <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/header.css">
-        <link rel="stylesheet" href="../css/addNewRecipe.css">
-        <script type="text/javascript" src="../js/addNewRecipe.js"></script>
+        <link rel="stylesheet" href="../css/singleMenu.css">
+        <script type="text/javascript" src="../js/singleMenu.js"></script>
     </head>
     <body>
         <header>
-            <img id="logo" src="../img/logo.png" onclick="javascript:location.href='./index.html';">
+            <div>
+                <img id="logo2" src="../img/logo2.png" onclick="javascript:location.href='./index.html';">
+                <img id="logo" src="../img/logo.png" onclick="javascript:location.href='./index.html';">
+            </div>
             <div id="rightSideHeader">
                 <div id="searchContainer">
                     <div id="searchDiv">
@@ -63,70 +66,25 @@
             <li><a href="./menuArchive.html">Archive of menus</a></li>
         </nav>
         <hr>
-        <h1 id="mainText">Add new recipe</h1>
+        <h1 id="mainText">Menu</h1>
         <main>
-            <container id="leftSidebar">
-                <div class="containerName">Day types of food</div>
-                <div class="containerFood">
-                    <div class="food" onclick="moveFood(0);"></div>
-                    <div class="food" onclick="moveFood(1);"></div>
-                    <div class="food" onclick="moveFood(2);"></div>
-                    <br>
-                    <div class="food" onclick="moveFood(3);"></div>
-                    <div class="food" onclick="moveFood(4);"></div>
-                    <div class="food" onclick="moveFood(5);"></div>
-                    <div class="food" onclick="moveFood(6);"></div>
-                    <br>
-                    <div class="food" onclick="moveFood(7);"></div>
-                    <div class="food" onclick="moveFood(8);"></div>
-                    <div class="food" onclick="moveFood(9);"></div>
-                    <br>
-                    <div class="food" onclick="moveFood(10);"></div>
-                    <div class="food" onclick="moveFood(11);"></div>
-                    <div class="food" onclick="moveFood(12);"></div>
+            <div id="menuDiv">
+                <div class="mealDiv">
+                    <div class="mealHeader">Breakfast</div>
                 </div>
-            </container>
-            <container id="mainContent">
-                <label for="selectFoodType">Topic *</label>
-                <br>
-                <select id="selectFoodType" name="selectFoodType">
-                    <option disabled selected>Choose a topic</option>
-                    <option value="Сніданок">Breakfast</option>
-                    <option value="Перекус">Snack</option>
-                    <option value="Обід">Dinner</option>
-                    <option value="Вечеря">Supper</option>
-                    <option value="Обід">Holiday</option>
-                </select>
-                <br>
-                <br>
-                <label for="foodName">Food summary *</label>
-                <br>
-                <input id="foodName" name="foodName" type="text" size="100" value="">
-                <br>
-                <br>
-                <br>
-                <br>
-                <label for="img">Download the food photo. Link to the site <a href="https://ru.imgbb.com/">https://ru.imgbb.com/</a> (take link from the Console). </label>
-                <br>
-                <input type="text" id="img" name="img" size="100">
-                <br>
-                <br>
-                <label for="recipeProduct">Products</label>
-                <br>
-                <div id="productsDiv"></div>
-                <br>
-                <br>
-                <label for="foodSummary">The food description *</label>
-                <br>
-                <textarea id="foodSummary" name="foodSummary" rows="10"></textarea>
-                <br>
-                <br>
-                <button id="result" type="button" onclick="saveRecipe()">Save</button>
-                <br>
-                <br>
-                <div id="errorMessage"></div>
-                <div id="successMessage"></div>
-            </container>
+                <div class="mealDiv">
+                    <div class="mealHeader">Dinner</div>
+                </div>
+                <div class="mealDiv">
+                    <div class="mealHeader">Snack</div>
+                </div>
+                <div class="mealDiv">
+                    <div class="mealHeader">Supper</div>
+                </div>
+            </div>
+            <div id="productsDiv">
+                <div id="listHeader">Shopping list</div>
+            </div>
         </main>
 </body>
 </html>
