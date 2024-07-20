@@ -46,7 +46,7 @@ main {
 #productsDiv {
     display: flex;
     flex-direction: column;
-    height: 20%;
+    height: 35%;
     border: 1px dashed;
     background-color:#FFF4E2
 }
@@ -85,11 +85,18 @@ main {
     width: 2rem;
     height: 1rem;
     margin-right: 0.5rem;
+    align-self: flex-start;
 }
 
 .gramText, .percentText {
     display: inline-block;
-    padding-right: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+textarea.productsSelect {
+    width: 64.2%;
+    margin: 0 0.5rem 0 0;
+    padding: 0;
 }
 
 .productsSelect {
@@ -103,9 +110,18 @@ main {
     display: inline-block;
     text-align: center;
     background-color: #d96140a6;
+    margin-right: 0.5rem;
 }
 
 #successMessage {
     color: #00bf63;
     padding-bottom: 3rem;
+}
+
+.plusBtn {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-block;
+    text-align: center;
+    background-color: #00bf63bd; 
 }

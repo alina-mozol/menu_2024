@@ -4,7 +4,7 @@ const Router = require("koa-router");
 const router = new Router();
 const body = require("koa-bodyparser");
 const cors = require("@koa/cors");
-const { checkForWork, getData, getDataProducts, saveData, saveDataMenu } = require("../modules/storage.js");
+const { checkForWork, getData, getDataProducts, saveData, saveDataMenu, getDataMenu } = require("../modules/storage.js");
 
 app.use(body());
 app.use(cors());
@@ -30,7 +30,7 @@ router.post(`/saveMenu`, fetch(saveDataMenu));
 // router.post(`/updateMenu/:path`, fetch(updateMenu));
 // router.post(`/saveProducrsList/:path`, fetch(saveProducrsList));
 router.get(`/get`, fetch(getData));
-// router.get(`/getMenu`, fetch(getDataMenu));
+router.get(`/getMenu`, fetch(getDataMenu));
 // router.get(`/getSavedMenu`, fetch(getSavedMenu));
 // router.get(`/getSavedMenuList/:path`, fetch(getSavedMenuList));
 // router.get(`/getChildrenSavedMenu`, fetch(getChildrenSavedMenu));

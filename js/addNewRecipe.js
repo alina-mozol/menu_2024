@@ -30,7 +30,17 @@ async function moveFood(num) {
             let productsDiv = document.getElementById("productsDiv");  // get recipe block
 
             let divFood = document.createElement("div"); // create a product div in the recipe block
-            let text = document.createElement("select");
+            let text;
+            if (Object.keys(value[num]) == 'f) Vegetables and mushrooms' || Object.keys(value[num]) == 'l) Vegetables and mushrooms') {
+                text = document.createElement("textarea");
+                text.setAttribute("rows", 4);
+                text.placeholder = "Enter vegetables and mushrooms. Max quantity - 300 gramms";
+            } else {
+                text = document.createElement("select");
+                text.addEventListener("click", () => {
+                    changeOption(num, divLength);
+                })
+            }
             let gram = document.createElement("input");
             let gramText = document.createElement("div");
             let percentage = document.createElement("input");
@@ -65,14 +75,18 @@ async function moveFood(num) {
             }
 
             close.innerText = "X"; // add close button to delete the chosen product
-            close.setAttribute("onclick", `removeFood(${divLength}, ${num});`);
+            close.addEventListener('click', function(e) {
+                let typesFood = document.getElementsByClassName("food")[num];
+                typesFood.style = "background-color: #FFF4E2;";
+                count[num] = false;
+
+                close.parentNode.remove();
+            })
 
             gram.addEventListener("input", function(){
                 listenEventsGram(divLength, num);
             });
-            text.addEventListener("click", () => {
-                changeOption(num, divLength);
-            })
+            
             percentage.addEventListener("input", function(){
                 listenEventsPercentage(divLength, num);
             });
@@ -161,17 +175,6 @@ async function listenEventsPercentage(divLength, num) {
     })
 }
 
-// method to remove chosen product from recipe
-async function removeFood(deleteNum, unblockNum) {
-    let deleteDiv = document.getElementById(`createdFood_${deleteNum}`);
-    let parent = deleteDiv.parentNode;
-    parent.removeChild(deleteDiv);
-
-    let typesFood = document.getElementsByClassName("food")[unblockNum];
-    typesFood.style = "background-color: #FFF4E2;";
-    count[unblockNum] = false;
-}
-
 // method to save ready recipe
 async function saveRecipe() {
     document.getElementById("successMessage").innerText = "";
@@ -190,8 +193,12 @@ async function saveRecipe() {
         let foodObj = {};
         for (let i = 1; i < food.length + 1; i++) {
             let foodName = document.getElementById(`text_${i}`);
-            let food = foodName.options[foodName.selectedIndex].text;
-            foodObj[food] = document.getElementById(`gram_${i}`).value;
+            if (foodName.placeholder == 'Enter vegetables and mushrooms. Max quantity - 300 gramms') {
+                foodObj[foodName.value] = 300;
+            } else {
+                let food = foodName.options[foodName.selectedIndex].text;
+                foodObj[food] = document.getElementById(`gram_${i}`).value;
+            }
         }
 
         let foods = {

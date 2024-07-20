@@ -1,17 +1,120 @@
 {
-  "breakfast": {
-    "b) Milk / kefir / yogurt 1.5-2.5%": ""
+  "1721398668266": {
+    "breakfast": {
+      "cereals": 143,
+      "milk_2.5%": "100"
+    },
+    "dinner": {
+      "cereals": "33",
+      "eggs": "2.5",
+      "vegetables_and_mashrooms": "300",
+      "oil": "8"
+    },
+    "snack": {
+      "milk_2.5%": "250",
+      "fruits_and_berries": "170",
+      "nuts_and_seeds": "8"
+    },
+    "supper": {
+      "eggs": "2.5",
+      "vegetables_and_mashrooms": "300",
+      "oil": "8"
+    }
   },
-  "dinner": {
-    "g) Fats": "",
-    "f) Vegetables and mushrooms": ""
+  "1721488571731": {
+    "breakfast": {
+      "snack": "55",
+      "qwerty": 300
+    },
+    "dinner": {},
+    "snack": {},
+    "supper": {}
   },
-  "snack": {
-    "j) Nuts and seeds": ""
+  "1721488992384": {
+    "breakfast": {
+      "fresh_corn": "110"
+    },
+    "dinner": {},
+    "snack": {
+      "cheese": "42"
+    },
+    "supper": {
+      "qwergh": "300"
+    }
   },
-  "supper": {
-    "m) Fats": "",
-    "l) Vegetables and mushrooms": "",
-    "k) Meat": ""
+  "1721489050704": {
+    "breakfast": {
+      "fresh_corn": "110"
+    },
+    "dinner": {},
+    "snack": {
+      "cheese": "42"
+    },
+    "supper": {
+      "qwergh": "300"
+    }
+  },
+  "1721489584191": {
+    "breakfast": {
+      "potato": "110",
+      "milk_2.5%": "100"
+    },
+    "dinner": {},
+    "snack": {
+      "fruits_and_berries": "170",
+      "avocado": "43"
+    },
+    "supper": {
+      "liver": "120",
+      "zxcvbgnhjmk,": "300"
+    }
+  },
+  "1721490024340": {
+    "breakfast": {
+      "a) Complex carbohydrates: cereals, bread, potatoes": "",
+      "b) Milk / kefir / yogurt": ""
+    },
+    "dinner": {},
+    "snack": {
+      "werftghyj": "300",
+      "i) Fruits and berries": ""
+    },
+    "supper": {
+      "asdfgh": "300",
+      "k) Meat": ""
+    }
+  },
+  "1721490152868": {
+    "breakfast": {
+      "a) Complex carbohydrates: cereals, bread, potatoes": "",
+      "b) Milk / kefir / yogurt": ""
+    },
+    "dinner": {},
+    "snack": {
+      "i) Fruits and berries": "",
+      "sdf": "300"
+    },
+    "supper": {
+      "m) Fats": "",
+      "k) Meat": ""
+    }
+  },
+  "1721490181608": {
+    "breakfast": {
+      "a) Complex carbohydrates: cereals, bread, potatoes": "",
+      "b) Milk / kefir / yogurt": ""
+    },
+    "dinner": {
+      "d) Complex carbohydrates: cereals, bread, potatoes": "",
+      "sdfg": "300"
+    },
+    "snack": {
+      "h) Milk products": "",
+      "i) Fruits and berries": ""
+    },
+    "supper": {
+      "sdf": "300",
+      "m) Fats": ""
+    }
   }
 }

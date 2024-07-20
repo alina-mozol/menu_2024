@@ -7,8 +7,8 @@
         <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
         <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../css/header.css">
-        <link rel="stylesheet" href="../css/createMenu.css">
-        <script type="text/javascript" src="../js/createMenu.js"></script>
+        <link rel="stylesheet" href="../css/singleMenu.css">
+        <script type="text/javascript" src="../js/singleMenu.js"></script>
     </head>
     <body>
         <header>
@@ -66,50 +66,25 @@
             <li><a href="./menuArchive.html">Archive of menus</a></li>
         </nav>
         <hr>
-        <h1 id="mainText">Create a menu</h1>
+        <h1 id="mainText">Menu</h1>
         <main>
-            <container id="leftSidebar">
-                <div class="containerName">Day types of food</div>
-                <div class="containerFood">
-                    <div class="food" onclick="moveFood(0);"></div>
-                    <div class="food" onclick="moveFood(1);"></div>
-                    <div class="food" onclick="moveFood(2);"></div>
-                    <br>
-                    <div class="food" onclick="moveFood(3);"></div>
-                    <div class="food" onclick="moveFood(4);"></div>
-                    <div class="food" onclick="moveFood(5);"></div>
-                    <div class="food" onclick="moveFood(6);"></div>
-                    <br>
-                    <div class="food" onclick="moveFood(7);"></div>
-                    <div class="food" onclick="moveFood(8);"></div>
-                    <div class="food" onclick="moveFood(9);"></div>
-                    <br>
-                    <div class="food" onclick="moveFood(10);"></div>
-                    <div class="food" onclick="moveFood(11);"></div>
-                    <div class="food" onclick="moveFood(12);"></div>
+            <div id="menuDiv">
+                <div class="mealDiv">
+                    <div class="mealHeader">Breakfast</div>
                 </div>
-            </container>
-            <container id="mainContent">
-                <div class="mealName">Breakfast</div>
-                <div class="productsDiv"></div>
-                <div class="mealName">Dinner</div>
-                <div class="productsDiv"></div>
-                <div class="mealName">Snack</div>
-                <div class="productsDiv"></div>
-                <div class="mealName">Supper</div>
-                <div class="productsDiv"></div>
-                <button id="result" type="button" onclick="saveMenu()">Save</button>
-                <div id="successMessage"></div>
-            </container>
-            <container id="rightSidebar">
-                <div class="containerName">Choose a recipe</div>
-                <div id="rightSidebarDiv">
-                    <div>
-                        <img id="addIcon" src="../img/add.png" alt="add recipe" onclick="">
-                    </div>
-                    <div id="chosenRecipes"></div>
+                <div class="mealDiv">
+                    <div class="mealHeader">Dinner</div>
                 </div>
-            </container>
+                <div class="mealDiv">
+                    <div class="mealHeader">Snack</div>
+                </div>
+                <div class="mealDiv">
+                    <div class="mealHeader">Supper</div>
+                </div>
+            </div>
+            <div id="productsDiv">
+                <div id="listHeader">Shopping list</div>
+            </div>
         </main>
 </body>
 </html>

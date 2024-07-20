@@ -27,7 +27,7 @@ const saveData = async ({
 const saveDataMenu = async ({
     request,
   }) => {
-    fs.writeFileSync(DB_PATH_MENU, JSON.stringify(request.body, null, 2));
+    fs.writeFileSync(DB_PATH_MENU, JSON.stringify( request.body, null, 2));
     return { status: "Saved" };
 }
 
@@ -81,10 +81,10 @@ const saveDataMenu = async ({
 //     return JSON.parse(data);
 // }
 
-// const getDataMenu = async () => {
-//     const data = fs.readFileSync(DB_PATH_MENU);
-//     return JSON.parse(data);
-// }
+const getDataMenu = async () => {
+    const data = fs.readFileSync(DB_PATH_MENU);
+    return JSON.parse(data);
+}
 
 // const getSavedMenu = async () => {
 //     const data = fs.readFileSync(DB_PATH_LIST);
@@ -131,7 +131,7 @@ module.exports = {
     // saveProducrsList,
     // checkForWork,
     getData,
-    // getDataMenu,
+    getDataMenu,
     // getSavedMenu,
     // getSavedMenuList,
     // getSavedList,

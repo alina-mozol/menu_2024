@@ -24,7 +24,7 @@ async function moveFood(num) {
     let enter = false;
     if (chosenProducts[num] == false) { // to protect a double addition of one product       
         await getData('http://localhost:3000/getDataProducts').then((value) => {
-            let productsDiv = document.querySelectorAll('.productsDiv');  // get all Recipe blocks via event listener
+            let productsDiv = document.querySelectorAll(".productsDiv");  // get all Recipe blocks via event listener
             let classIndex;
             productsDiv.forEach((item, index) => {
                 item.addEventListener('click', event => {
@@ -33,7 +33,17 @@ async function moveFood(num) {
                         classIndex = index;
                             
                         let divFood = document.createElement("div"); // create a product div in the recipe block
-                        let text = document.createElement("select");
+                        let text;
+                        if (Object.keys(value[num]) == 'f) Vegetables and mushrooms' || Object.keys(value[num]) == 'l) Vegetables and mushrooms') {
+                            text = document.createElement("textarea");
+                            text.setAttribute("rows", 4);
+                            text.placeholder = "Enter vegetables and mushrooms. Max quantity - 300 gramms";
+                        } else {
+                            text = document.createElement("select");
+                            text.addEventListener("click", () => {
+                                changeOption(num, divLength);
+                            })
+                        }
                         let gram = document.createElement("input");
                         let gramText = document.createElement("div");
                         let percentage = document.createElement("input");
@@ -73,9 +83,7 @@ async function moveFood(num) {
                         gram.addEventListener("input", function(){
                             listenEventsGram(divLength, num);
                         });
-                        text.addEventListener("click", () => {
-                            changeOption(num, divLength);
-                        })
+
                         percentage.addEventListener("input", function(){
                             listenEventsPercentage(divLength, num);
                         });
@@ -206,34 +214,74 @@ async function saveMenu() {
     for (let i = 1; i <  totalProductsQuantity + 1; i++) {
         if (i < productsQuantity[0] + 1) {
             let foodName = document.getElementById(`text_${i}`);
-            let food = foodName.options[foodName.selectedIndex].text;
-            foodBreakfast[food] = document.getElementById(`gram_${i}`).value;
+            if (foodName.placeholder == 'Enter vegetables and mushrooms. Max quantity - 300 gramms') {
+                foodBreakfast[foodName.value] = "300";
+            } else {
+                let food = foodName.options[foodName.selectedIndex].text;
+                if (foodBreakfast[food]) {
+                    foodBreakfast[food] = Number(foodBreakfast[food]) + Number(document.getElementById(`gram_${i}`).value);
+                } else {
+                    foodBreakfast[food] = document.getElementById(`gram_${i}`).value;
+                }
+            }
         } else if (i >= (productsQuantity[0] + 1) && i < (productsQuantity[0] + productsQuantity[1] + 1)) {
-            let foodName = document.getElementById(`text_${i}`);
-            let food = foodName.options[foodName.selectedIndex].text;
-            foodDinner[food] = document.getElementById(`gram_${i}`).value;
+                let foodName = document.getElementById(`text_${i}`);
+                if (foodName.placeholder == 'Enter vegetables and mushrooms. Max quantity - 300 gramms') {
+                    foodDinner[foodName.value] = "300";
+                } else {
+                    let food = foodName.options[foodName.selectedIndex].text;
+                    if (foodDinner[food]) {
+                        foodDinner[food] = Number(foodDinner[food]) + Number(document.getElementById(`gram_${i}`).value);
+                    } else {
+                        foodDinner[food] = document.getElementById(`gram_${i}`).value;
+                    }
+                }
         } else if (i >= (productsQuantity[0] + productsQuantity[1] + 1) && (i < productsQuantity[0] + productsQuantity[1] + productsQuantity[2] + 1)) {
             let foodName = document.getElementById(`text_${i}`);
-            let food = foodName.options[foodName.selectedIndex].text;
-            foodSnack[food] = document.getElementById(`gram_${i}`).value;
+            if (foodName.placeholder == 'Enter vegetables and mushrooms. Max quantity - 300 gramms') {
+                console.log(i, foodName)
+                foodSnack[foodName.value] = "300";
+            } else {
+                let food = foodName.options[foodName.selectedIndex].text;
+                if (foodSnack[food]) {
+                    foodSnack[food] = Number(foodSnack[food]) + Number(document.getElementById(`gram_${i}`).value);
+                } else {
+                    foodSnack[food] = document.getElementById(`gram_${i}`).value;
+                }
+            }
         } else if (i >= (productsQuantity[0] + productsQuantity[1] + productsQuantity[2] + 1)) {
             let foodName = document.getElementById(`text_${i}`);
-            let food = foodName.options[foodName.selectedIndex].text;
-            foodSupper[food] = document.getElementById(`gram_${i}`).value;
+            if (foodName.placeholder == 'Enter vegetables and mushrooms. Max quantity - 300 gramms') {
+                foodSupper[foodName.value] = "300";
+            } else {
+                let food = foodName.options[foodName.selectedIndex].text;
+                if (foodSupper[food]) {
+                    foodSupper[food] = Number(foodSupper[food]) + Number(document.getElementById(`gram_${i}`).value);
+                } else {
+                    foodSupper[food] = document.getElementById(`gram_${i}`).value;
+                }
+            }
         }    
     }
 
+    let timestamp = Date.now();
+
     let foods = {
-        breakfast: foodBreakfast,
-        dinner: foodDinner,
-        snack: foodSnack,
-        supper: foodSupper
+        "breakfast": foodBreakfast,
+        "dinner": foodDinner,
+        "snack": foodSnack,
+        "supper": foodSupper
     }
-    const saveOp = fetch('http://localhost:3000/saveMenu', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(foods),
-    });
+    console.log(foods)
+
+    await getData('http://localhost:3000/getMenu').then((value) => {
+        value[`${timestamp}`] = foods;
+        const saveOp = fetch('http://localhost:3000/saveMenu', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(value),
+        });
+    })
 
     document.getElementById("successMessage").innerText = "The menu is saved";
 }

@@ -249,5 +249,74 @@
       "k) Meat": ""
     },
     "foodSummary": "q"
+  },
+  {
+    "topic": "Сніданок",
+    "recipeName": "q",
+    "imgData": "q",
+    "products": {
+      "g) Fats": ""
+    },
+    "foodSummary": "q"
+  },
+  {
+    "topic": "Сніданок",
+    "recipeName": "q",
+    "imgData": "q",
+    "products": {
+      "[object HTMLCollection]": "",
+      "g) Fats": ""
+    },
+    "foodSummary": "q"
+  },
+  {
+    "topic": "Перекус",
+    "recipeName": "q",
+    "imgData": "q",
+    "products": {
+      "[object HTMLCollection]": ""
+    },
+    "foodSummary": "q"
+  },
+  {
+    "topic": "Сніданок",
+    "recipeName": "s",
+    "imgData": "s",
+    "products": {
+      "[object HTMLCollection]": {
+        "Vegetables and mushrooms": ""
+      }
+    },
+    "foodSummary": "s"
+  },
+  {
+    "topic": "Перекус",
+    "recipeName": "q",
+    "imgData": "q",
+    "products": {
+      "[object HTMLCollection]": "qwerty"
+    },
+    "foodSummary": "q"
+  },
+  {
+    "topic": "Сніданок",
+    "recipeName": "q",
+    "imgData": "q",
+    "products": {
+      "qwerty- 12, qwerty - 123, qwrtyui - 123": 300
+    },
+    "foodSummary": "q"
+  },
+  {
+    "topic": "Обід",
+    "recipeName": "q",
+    "imgData": "q",
+    "products": {
+      "potato": "110",
+      "chicken_brest": "140",
+      "qwerty - 10": 300,
+      "mustard": "21"
+    },
+    "foodSummary": "q"
   }
 ]
