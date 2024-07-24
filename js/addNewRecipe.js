@@ -23,7 +23,7 @@ let nextId;
 // method to choose a products for recipe
 async function moveFood(num) {
     if (count[num] == false) { // to protect a double addition of one product
-        let typesFood = document.getElementsByClassName("foodItem")[num];
+        let typesFood = document.getElementsByClassName("food-item")[num];
         typesFood.style = "background-color: #cccccc9e;";
         count[num] = true;
         
@@ -39,12 +39,12 @@ async function moveFood(num) {
             let close = document.createElement("div");
 
             divFood.className = "productsList";
-            text.className = "productsSelect"
-            gram.className = "gramFood";
-            gramText.className = "gramText";
-            percentage.className = "percentageFood";
-            percentText.className = "percentText";
-            close.className = "closeBtn";
+            text.className = "products-select"
+            gram.className = "gram-food";
+            gramText.className = "gram-text";
+            percentage.className = "percentage-food";
+            percentText.className = "percent-text";
+            close.className = "close-btn";
 
             if (nextId === undefined) {
                 nextId = 0;
@@ -120,19 +120,19 @@ async function changeOption(num, nextIdNumber) {
         gramInput.value = (savedGram * percentageInput.value / 100).toFixed(0);
         
         let usedProductLength = document.getElementsByClassName("productsList"); // all chosen products
-        let currentPercent = document.getElementsByClassName("percentageFood"); // percent of current product
+        let currentPercent = document.getElementsByClassName("percentage-food"); // percent of current product
 
         let foodList = document.getElementsByClassName("food")[num].innerText; // name of current product
         let tailingsPercent = 0;
         for (let i = 0; i < usedProductLength.length; i++) {
-            if (document.getElementsByClassName("productsSelect")[i][0].value == foodList) {
+            if (document.getElementsByClassName("products-select")[i][0].value == foodList) {
                 tailingsPercent += Number(currentPercent[i].value);
             }
         }
         percentField.innerText = (100 - tailingsPercent).toFixed(0);
 
         if (percentField.innerText == 0) {
-            let typesFood = document.getElementsByClassName("foodItem")[num];
+            let typesFood = document.getElementsByClassName("food-item")[num];
             typesFood.style = "background-color: #cccccc9e;";
             count[num] = true;
         }
@@ -141,7 +141,7 @@ async function changeOption(num, nextIdNumber) {
 
 // method to recalculate grams of product after changing percents of the product
 async function changePercentage(nextId, num) {
-    let typesFood = document.getElementsByClassName("foodItem")[num];
+    let typesFood = document.getElementsByClassName("food-item")[num];
     typesFood.style = "background-color: #cccccc9e;";
     count[num] = true;
 
@@ -157,7 +157,7 @@ async function changePercentage(nextId, num) {
 
 // method to recalculate percents of product after changing grams of the product
 async function changeGrams(nextId, num) {
-    let typesFood = document.getElementsByClassName("foodItem")[num];
+    let typesFood = document.getElementsByClassName("food-item")[num];
     typesFood.style = "background-color: #cccccc9e;";
     count[num] = true;
 
@@ -185,8 +185,8 @@ function recalculateUsedProductPercent(nextId, num) {
         let tailingsPercent = 0;
 
         for (let i = 0; i < usedProductLength.length; i++) {
-            if (document.getElementsByClassName("productsSelect")[i][0].value == foodList) {
-                tailingsPercent += Number(document.getElementsByClassName("percentageFood")[i].value);
+            if (document.getElementsByClassName("products-select")[i][0].value == foodList) {
+                tailingsPercent += Number(document.getElementsByClassName("percentage-food")[i].value);
             }
         }
 
@@ -202,7 +202,7 @@ function recalculateUsedProductPercent(nextId, num) {
         currentGram.value = (savedGram * currentPercent.value / 100).toFixed(0);;
 
         if (percentField.innerText != 0) {
-            let typesFood = document.getElementsByClassName("foodItem")[num];
+            let typesFood = document.getElementsByClassName("food-item")[num];
             typesFood.style = "background-color: #FFF4E2;";
             count[num] = false;
         }
@@ -219,7 +219,7 @@ async function removeFood(deleteNum, unblockNum) {
     let parent = deleteDiv.parentNode;
     parent.removeChild(deleteDiv);
 
-    let typesFood = document.getElementsByClassName("foodItem")[unblockNum];
+    let typesFood = document.getElementsByClassName("food-item")[unblockNum];
     typesFood.style = "background-color: #FFF4E2;";
     count[unblockNum] = false;
 
@@ -235,7 +235,7 @@ async function saveRecipe() {
     let recipeName = document.getElementById("foodName").value;
 	let imgLink = document.getElementById("img").value;
     let foodSummary = document.getElementById("foodSummary").value;
-    let food = document.getElementsByClassName("productsSelect");
+    let food = document.getElementsByClassName("products-select");
 
     if (topic === "Обрати тему" || recipeName === "" || imgLink === 0 || foodSummary === "") {
     	document.getElementById("errorMessage").innerText = "Fill the required fields!"
@@ -244,9 +244,9 @@ async function saveRecipe() {
 
         let foodObj = {};
         for (let i = 0; i < food.length; i++) {
-            let foodName = document.getElementsByClassName("productsSelect")[i];
+            let foodName = document.getElementsByClassName("products-select")[i];
             let foodText = foodName.options[foodName.selectedIndex].text;
-            foodObj[foodText] = document.getElementsByClassName("gramFood")[i].value;
+            foodObj[foodText] = document.getElementsByClassName("gram-food")[i].value;
         }
 
         let foods = {

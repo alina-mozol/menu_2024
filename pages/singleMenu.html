@@ -6,9 +6,7 @@
         <title>Menu</title>
         <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
         <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/header.css">
-        <link rel="stylesheet" href="../css/singleMenu.css">
-        <script type="text/javascript" src="../js/singleMenu.js"></script>
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
         <header>
@@ -26,9 +24,9 @@
                     </div>
                 </div>
                 <div id="searchCheckbox">
-                    <input type="checkbox" id="recipeCheckbox" class="checkboxSearch" name="recipeCheckbox" checked disabled>
+                    <input type="checkbox" id="recipeCheckbox" class="checkbox-search" name="recipeCheckbox" checked disabled>
                     <label for="recipeCheckbox">Search by food name</label>
-                    <input type="checkbox" id="productCheckbox" class="checkboxSearch" name="productCheckbox" disabled>
+                    <input type="checkbox" id="productCheckbox" class="checkbox-search" name="productCheckbox" disabled>
                     <label for="productCheckbox">Search by ingredients</label>
                 </div>
             </div>
@@ -70,21 +68,22 @@
         <main>
             <div id="menuDiv">
                 <div class="mealDiv">
-                    <div class="mealHeader">Breakfast</div>
+                    <div class="meal-header">Breakfast</div>
                 </div>
                 <div class="mealDiv">
-                    <div class="mealHeader">Dinner</div>
+                    <div class="meal-header">Dinner</div>
                 </div>
                 <div class="mealDiv">
-                    <div class="mealHeader">Snack</div>
+                    <div class="meal-header">Snack</div>
                 </div>
                 <div class="mealDiv">
-                    <div class="mealHeader">Supper</div>
+                    <div class="meal-header">Supper</div>
                 </div>
             </div>
-            <div id="productsDiv">
+            <div id="products-list-div">
                 <div id="listHeader">Shopping list</div>
             </div>
         </main>
-</body>
+        <script type="text/javascript" src="../js/singleMenu.js"></script>
+    </body>
 </html>

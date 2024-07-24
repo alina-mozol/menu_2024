@@ -24,7 +24,7 @@ function showMenu() {
         let breakfastValue = value[`${title}`].breakfast;
         for (const prop in breakfastValue) {
             let menuRow = document.createElement("li");
-            menuRow.className = "menuRow";
+            menuRow.className = "menu-row";
             let unit;
             if (prop === "eggs") {
                 unit = "pieces";
@@ -38,7 +38,7 @@ function showMenu() {
         let dinnerValue = value[`${title}`].dinner;
         for (const prop in dinnerValue) {
             let menuRow = document.createElement("li");
-            menuRow.className = "menuRow";
+            menuRow.className = "menu-row";
             let unit;
             if (prop === "eggs") {
                 unit = "pieces";
@@ -52,7 +52,7 @@ function showMenu() {
         let snackValue = value[`${title}`].snack;
         for (const prop in snackValue) {
             let menuRow = document.createElement("li");
-            menuRow.className = "menuRow";
+            menuRow.className = "menu-row";
             let unit;
             if (prop === "eggs") {
                 unit = "pieces";
@@ -66,7 +66,7 @@ function showMenu() {
         let supperValue = value[`${title}`].supper;
         for (const prop in supperValue) {
             let menuRow = document.createElement("li");
-            menuRow.className = "menuRow";
+            menuRow.className = "menu-row";
             let unit;
             if (prop === "eggs") {
                 unit = "pieces";
@@ -82,13 +82,13 @@ function showMenu() {
 // method to show the list of products during on loading page
 function showProductsList() {
     getData('http://localhost:3000/getMenu').then((value) => {
-        let productsDiv = document.getElementById("productsDiv");
+        let productsDiv = document.getElementById("products-list-div");
         let title = localStorage.getItem("chosenMenu");
         let breakfastValue = value[`${title}`].breakfast;
 
         for (const prop in breakfastValue) {
             let menuRow = document.createElement("li");
-            menuRow.className = "listRow";
+            menuRow.className = "list-row";
             let unit;
             if (prop === "eggs") {
                 unit = "pieces";
@@ -97,8 +97,8 @@ function showProductsList() {
             }
 
             let alreadyAdded = false;
-            let listRow = document.getElementsByClassName("listRow");
-            for (let i = 0; i < document.getElementsByClassName("listRow").length; i++) {
+            let listRow = document.getElementsByClassName("list-row");
+            for (let i = 0; i < document.getElementsByClassName("list-row").length; i++) {
                 let textProduct = listRow[i].innerText;
                 let sliceTextProduct = textProduct.split(' ');
                 if (sliceTextProduct[0] == prop ) {
@@ -118,7 +118,7 @@ function showProductsList() {
         let dinnerValue = value[`${title}`].dinner;
         for (const prop in dinnerValue) {
             let menuRow = document.createElement("li");
-            menuRow.className = "listRow";
+            menuRow.className = "list-row";
             let unit;
             if (prop === "eggs") {
                 unit = "pieces";
@@ -127,8 +127,8 @@ function showProductsList() {
             }
 
             let alreadyAdded = false;
-            let listRow = document.getElementsByClassName("listRow");
-            for (let i = 0; i < document.getElementsByClassName("listRow").length; i++) {
+            let listRow = document.getElementsByClassName("list-row");
+            for (let i = 0; i < document.getElementsByClassName("list-row").length; i++) {
                 let textProduct = listRow[i].innerText;
                 let sliceTextProduct = textProduct.split(' ');
                 if (sliceTextProduct[0] == prop ) {
@@ -148,7 +148,7 @@ function showProductsList() {
         let snackValue = value[`${title}`].snack;
         for (const prop in snackValue) {
             let menuRow = document.createElement("li");
-            menuRow.className = "listRow";
+            menuRow.className = "list-row";
             let unit;
             if (prop === "eggs") {
                 unit = "pieces";
@@ -157,8 +157,8 @@ function showProductsList() {
             }
 
             let alreadyAdded = false;
-            let listRow = document.getElementsByClassName("listRow");
-            for (let i = 0; i < document.getElementsByClassName("listRow").length; i++) {
+            let listRow = document.getElementsByClassName("list-row");
+            for (let i = 0; i < document.getElementsByClassName("list-row").length; i++) {
                 let textProduct = listRow[i].innerText;
                 let sliceTextProduct = textProduct.split(' ');
                 if (sliceTextProduct[0] == prop ) {
@@ -178,7 +178,7 @@ function showProductsList() {
         let supperValue = value[`${title}`].supper;
         for (const prop in supperValue) {
             let menuRow = document.createElement("li");
-            menuRow.className = "listRow";
+            menuRow.className = "list-row";
             let unit;
             if (prop === "eggs") {
                 unit = "pieces";
@@ -187,8 +187,8 @@ function showProductsList() {
             }
 
             let alreadyAdded = false;
-            let listRow = document.getElementsByClassName("listRow");
-            for (let i = 0; i < document.getElementsByClassName("listRow").length; i++) {
+            let listRow = document.getElementsByClassName("list-row");
+            for (let i = 0; i < document.getElementsByClassName("list-row").length; i++) {
                 let textProduct = listRow[i].innerText;
                 let sliceTextProduct = textProduct.split(' ');
                 if (sliceTextProduct[0] == prop ) {

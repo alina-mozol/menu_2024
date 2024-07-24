@@ -9,16 +9,16 @@ async function getData(url) {
 // method to show the list of menus during on loading page
 function showMenus() {
     getData('http://localhost:3000/getMenu').then((value) => {
-        let menuList = document.getElementById("menuDiv");
+        let menuList = document.getElementById("menuDivList");
         
         for (let i = 0; i < Object.keys(value).length; i++) {
             let menuRow = document.createElement("div");
             let menuLink = document.createElement("a");
             let deleteDiv = document.createElement("div");
 
-            menuRow.className = "menuRow";
-            menuLink.className = "menuItem";
-            deleteDiv.className = "deleteBtn";
+            menuRow.className = "menu-row-list";
+            menuLink.className = "menu-item";
+            deleteDiv.className = "delete-btn";
 
             let savedDate = new Date(Number(Object.keys(value)[i])).toLocaleDateString();
             let savedTime = new Date(Number(Object.keys(value)[i])).toLocaleTimeString();
@@ -28,7 +28,7 @@ function showMenus() {
             menuRow.setAttribute("value", `${Object.keys(value)[i]}`);
             deleteDiv.innerText = "X";
             deleteDiv.addEventListener('click', function(e) {
-                let quantityRows = document.getElementsByClassName("menuRow");
+                let quantityRows = document.getElementsByClassName("menu-row-list");
                 let deletedMenuIndex = 0;
 
                 for (let i = 0; i < quantityRows.length; i++) {
