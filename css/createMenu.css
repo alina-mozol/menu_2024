@@ -100,10 +100,29 @@ main {
     margin-bottom: 1.5rem;
 }
 
-.food {
+/* .food {
     border: 1px dashed;
     margin-bottom: 0.5rem;
     background-color:#FFF4E2
+} */
+
+.containerFood {
+    display: flex;
+    flex-direction: column;
+}
+
+.foodItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px dashed;
+    margin-bottom: 0.5rem;
+    background-color:#FFF4E2;
+}
+
+.percentTailings {
+    display: flex;
+    flex-direction: row;
 }
 
 .gramFood, .percentageFood {

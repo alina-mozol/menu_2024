@@ -12,7 +12,10 @@
     </head>
     <body>
         <header>
-            <img id="logo" src="../img/logo.png" onclick="javascript:location.href='./index.html';">
+            <div>
+                <img id="logo2" src="../img/logo2.png" onclick="javascript:location.href='./index.html';">
+                <img id="logo" src="../img/logo.png" onclick="javascript:location.href='./index.html';">
+            </div>
             <div id="rightSideHeader">
                 <div id="searchContainer">
                     <div id="searchDiv">
@@ -68,22 +71,97 @@
             <container id="leftSidebar">
                 <div class="containerName">Day types of food</div>
                 <div class="containerFood">
-                    <div class="food" onclick="moveFood(0);"></div>
-                    <div class="food" onclick="moveFood(1);"></div>
-                    <div class="food" onclick="moveFood(2);"></div>
-                    <br>
-                    <div class="food" onclick="moveFood(3);"></div>
-                    <div class="food" onclick="moveFood(4);"></div>
-                    <div class="food" onclick="moveFood(5);"></div>
-                    <div class="food" onclick="moveFood(6);"></div>
-                    <br>
-                    <div class="food" onclick="moveFood(7);"></div>
-                    <div class="food" onclick="moveFood(8);"></div>
-                    <div class="food" onclick="moveFood(9);"></div>
-                    <br>
-                    <div class="food" onclick="moveFood(10);"></div>
-                    <div class="food" onclick="moveFood(11);"></div>
-                    <div class="food" onclick="moveFood(12);"></div>
+                    <div class="foodItem" onclick="moveFood(0);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(1);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(2);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(3);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(4);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(5);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(6);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(7);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(8);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(9);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(10);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(11);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
+                    <div class="foodItem" onclick="moveFood(12);">
+                        <div class="food"></div>
+                        <div class="percentTailings">
+                            <div class="foodPercent">100</div>
+                            <div>%</div>
+                        </div>
+                    </div>
                 </div>
             </container>
             <container id="mainContent">
@@ -91,11 +169,11 @@
                 <br>
                 <select id="selectFoodType" name="selectFoodType">
                     <option disabled selected>Choose a topic</option>
-                    <option value="Сніданок">Breakfast</option>
-                    <option value="Перекус">Snack</option>
-                    <option value="Обід">Dinner</option>
-                    <option value="Вечеря">Supper</option>
-                    <option value="Обід">Holiday</option>
+                    <option value="Breakfast">Breakfast</option>
+                    <option value="Snack">Snack</option>
+                    <option value="Dinner">Dinner</option>
+                    <option value="Supper">Supper</option>
+                    <option value="Holiday">Holiday</option>
                 </select>
                 <br>
                 <br>

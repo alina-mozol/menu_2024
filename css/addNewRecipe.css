@@ -75,10 +75,23 @@ main {
     text-decoration: none;
 }
 
-.food {
+.containerFood {
+    display: flex;
+    flex-direction: column;
+}
+
+.foodItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     border: 1px dashed;
     margin-bottom: 0.5rem;
-    background-color:#FFF4E2
+    background-color:#FFF4E2;
+}
+
+.percentTailings {
+    display: flex;
+    flex-direction: row;
 }
 
 .gramFood, .percentageFood {
@@ -91,12 +104,6 @@ main {
 .gramText, .percentText {
     display: inline-block;
     margin-right: 0.5rem;
-}
-
-textarea.productsSelect {
-    width: 64.2%;
-    margin: 0 0.5rem 0 0;
-    padding: 0;
 }
 
 .productsSelect {
@@ -116,12 +123,4 @@ textarea.productsSelect {
 #successMessage {
     color: #00bf63;
     padding-bottom: 3rem;
-}
-
-.plusBtn {
-    width: 1.5rem;
-    height: 1.5rem;
-    display: inline-block;
-    text-align: center;
-    background-color: #00bf63bd; 
 }
