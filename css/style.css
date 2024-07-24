@@ -1,0 +1,410 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "Open Sans",sans-serif;
+}
+
+/* header */
+header {
+    max-width: 1680px;
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:1rem;
+}
+
+#logo {
+    width: 12rem;
+    height: 5rem;
+    align-self: center;
+    cursor: pointer;
+}
+
+#logo2 {
+    width: 5rem;
+    /* height: 5rem; */
+    align-self: center;
+    cursor: pointer;
+}
+
+#menu {
+    width: 3rem;
+    height: 3rem;
+}
+
+label {
+    font: 1rem black;
+    padding-bottom: 0.5rem;
+}
+
+#rightSideHeader {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+#rightSidebarDiv {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 92%;
+    border: 1px dashed;
+    background-color:#FFF4E2;
+}
+
+#mobileMenu {
+    display: none;
+}
+
+#searchContainer {
+    display: inline-flex;
+}
+
+#searchField {
+    width: 20rem;
+    height: 2.3rem;
+    border: 1px solid #ccc;
+    padding: 0;
+    margin: 0;
+}
+
+#searchBtn {
+    width: 2.3rem;
+    height: 2.3rem;
+    background: #ff914d;
+    border: 1px solid #ff914d;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+#searchDiv {
+    background: #ff914d;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+#searchImg {
+    align-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    padding: 0;
+    margin: 0;
+}
+
+.checkbox-search {
+    width: 1rem;
+    height: 1rem;
+    cursor: pointer;
+}
+
+nav {
+    max-width: 1680px;
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding: 0 1rem;
+}
+
+nav li {
+    position: relative;
+    padding-right: 2rem;
+    background-color: #ffffff;
+    list-style-type: none;
+}
+
+nav ul {
+    position: absolute;
+    display: none;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 1rem 1.5rem rgba(0,0,0,0.10), 0 0.7rem 0.7rem rgba(0,0,0,0.10);
+    z-index: 1;
+}
+
+nav li a {
+    font-size: 1.5rem;
+    color: #800080;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+nav li a:hover {
+    color: #ff914d;
+}
+
+nav li ul {
+    align-self: flex-start;
+    padding: 0;
+    list-style-type: none;
+}
+
+nav li ul li {
+    padding: 0 0.5rem;
+    align-self: flex-start;
+    list-style-type: none;
+}
+
+nav li ul li a {
+    padding: 0;
+    font-size: 1.1rem;
+    color: #800080;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+nav li:hover ul {
+    display: block;
+}
+
+hr {
+    align-self: center;
+    max-width: 1680px;
+    width: 100%;
+}
+
+@media only screen and (max-device-width: 691px) {
+    #rightSideHeader {
+        display: none;
+    }
+    
+    nav {
+        display: none;
+    }
+
+    #mobileMenu {
+        display: block;
+    }
+}
+
+/* main content */
+h1 {
+    text-align: center;
+    font-family: "Caveat", cursive;
+    font-size: 4rem;
+    color: #ff914d;
+}
+
+#mainText {
+    text-align: center;
+    font-family: "Caveat", cursive;
+    font-size: 4rem;
+	color: #ff914d;
+}
+
+main {
+    max-width: 1680px;
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.container-name {
+    align-content: center;
+    flex-direction: column;
+    font-size: 1.5rem;
+    color: #800080;
+    font-weight: bold;
+}
+
+#leftSidebar, #rightSidebar {
+    width: 20%;
+}
+
+#mainContent {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+#mainContentPage {
+    width: 56%;
+}
+
+#addIcon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
+
+.meal-name {
+    font-size: 1.5rem;
+    color: #00bf63;
+    font-weight: bold;
+}
+
+.element-div {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1.5rem;
+}
+
+#productsDiv {
+    display: flex;
+    flex-direction: column;
+    height: 10rem;
+    width: 65%;
+    border: 1px dashed;
+    background-color:#FFF4E2
+}
+
+.products-list-div {
+    display: flex;
+    flex-direction: column;
+    height: 20%;
+    border: 1px dashed;
+    background-color:#FFF4E2;
+    margin-bottom: 2rem;
+}
+
+#productsList {
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    border: 1px dashed;
+    background-color:#FFF4E2;
+}
+
+#selectFoodType {
+    width: 65.7%;
+}
+
+#foodName, #img, #foodSummary {
+    width: 65%;
+}
+
+#result {
+    width: 13rem;
+    height: 2.5rem;
+    margin-top: 1rem;
+    font-size: 1rem;
+    text-align: center;
+    vertical-align: middle;
+    background: linear-gradient(#00bf63, #c1ff72);
+    border-radius: 1rem;
+    border-color: #00bf63;
+    text-decoration: none;
+}
+
+.container-food {
+    display: flex;
+    flex-direction: column;
+}
+
+.food-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px dashed;
+    margin-bottom: 0.5rem;
+    background-color:#FFF4E2;
+}
+
+.percent-tailings {
+    display: flex;
+    flex-direction: row;
+}
+
+.gram-food, .percentage-food {
+    width: 2rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    align-self: flex-start;
+}
+
+.gram-text, .percent-text {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.products-select {
+    width: 65%;
+    margin-right: 0.5rem;
+}
+
+.close-btn {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: inline-block;
+    text-align: center;
+    background-color: #d96140a6;
+    margin-right: 0.5rem;
+}
+
+#successMessage {
+    color: #00bf63;
+    padding-bottom: 3rem;
+}
+
+#errorMessage {
+    color: red;
+    padding-bottom: 3rem;
+}
+
+/* archived menu page */
+#menuDiv, #products-list-div {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.meal-header {
+    font-family: "Caveat", cursive;
+    font-size: 2rem;
+	color: #800080;
+}
+
+#listHeader {
+    font-family: "Caveat", cursive;
+    font-size: 2rem;
+	color: #00bf63;
+}
+
+.menu-row, .list-row {
+    margin: 0 0 0.5rem 2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* archived menu list page  */
+#mainContainer {
+    max-width: 1680px;
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+}
+
+.menu-row-list {
+    display: flex;
+    flex-direction: row;
+    gap: 2%;
+}
+
+.menu-item, .products-item {
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    color: black;
+}
+
+.delete-btn {
+    width: 1.4rem;
+    height: 1.4rem;
+    text-align: center;
+    background-color: #d96140a6;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}

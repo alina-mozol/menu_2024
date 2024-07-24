@@ -25,7 +25,7 @@ async function moveFood(num) {
     let enter = false;
     if (chosenProducts[num] == false) { // to protect a double addition of one product       
         await getData('http://localhost:3000/getDataProducts').then((value) => {
-            let productsDiv = document.querySelectorAll(".productsDiv");  // get all Recipe blocks via event listener
+            let productsDiv = document.querySelectorAll(".products-list-div");  // get all Recipe blocks via event listener
             let classIndex;
             productsDiv.forEach((item, index) => {
                 item.addEventListener('click', event => {
@@ -42,12 +42,12 @@ async function moveFood(num) {
                         let close = document.createElement("div");
 
                         divFood.className = "productsList";
-                        text.className = "productsSelect"
-                        gram.className = "gramFood";
-                        gramText.className = "gramText";
-                        percentage.className = "percentageFood";
-                        percentText.className = "percentText";
-                        close.className = "closeBtn";
+                        text.className = "products-select"
+                        gram.className = "gram-food";
+                        gramText.className = "gram-text";
+                        percentage.className = "percentage-food";
+                        percentText.className = "percent-text";
+                        close.className = "close-btn";
 
                         if (nextId === undefined) {
                             nextId = 0;
@@ -101,7 +101,7 @@ async function moveFood(num) {
                     }
                 })
             });
-            let typesFood = document.getElementsByClassName("foodItem")[num];
+            let typesFood = document.getElementsByClassName("food-item")[num];
             typesFood.style = "background-color: #cccccc9e;";
             chosenProducts[num] = true;
         })
@@ -128,19 +128,19 @@ async function changeOption(num, nextIdNumber) {
         gramInput.value = (savedGram * percentageInput.value / 100).toFixed(0);
         
         let usedProductLength = document.getElementsByClassName("productsList"); // all chosen products
-        let currentPercent = document.getElementsByClassName("percentageFood"); // percent of current product
+        let currentPercent = document.getElementsByClassName("percentage-food"); // percent of current product
 
         let foodList = document.getElementsByClassName("food")[num].innerText; // name of current product
         let tailingsPercent = 0;
         for (let i = 0; i < usedProductLength.length; i++) {
-            if (document.getElementsByClassName("productsSelect")[i][0].value == foodList) {
+            if (document.getElementsByClassName("products-select")[i][0].value == foodList) {
                 tailingsPercent += Number(currentPercent[i].value);
             }
         }
         percentField.innerText = (100 - tailingsPercent).toFixed(0);
 
         if (percentField.innerText == 0) {
-            let typesFood = document.getElementsByClassName("foodItem")[num];
+            let typesFood = document.getElementsByClassName("food-item")[num];
             typesFood.style = "background-color: #cccccc9e;";
             chosenProducts[num] = true;
         }
@@ -149,7 +149,7 @@ async function changeOption(num, nextIdNumber) {
 
 // method to recalculate grams of product after changing percents of the product
 async function changePercentage(nextId, num) {
-    let typesFood = document.getElementsByClassName("foodItem")[num];
+    let typesFood = document.getElementsByClassName("food-item")[num];
     typesFood.style = "background-color: #cccccc9e;";
     chosenProducts[num] = true;
 
@@ -165,7 +165,7 @@ async function changePercentage(nextId, num) {
 
 // method to recalculate percents of product after changing grams of the product
 async function changeGrams(nextId, num) {
-    let typesFood = document.getElementsByClassName("foodItem")[num];
+    let typesFood = document.getElementsByClassName("food-item")[num];
     typesFood.style = "background-color: #cccccc9e;";
     chosenProducts[num] = true;
 
@@ -193,8 +193,8 @@ function recalculateUsedProductPercent(nextId, num) {
         let tailingsPercent = 0;
 
         for (let i = 0; i < usedProductLength.length; i++) {
-            if (document.getElementsByClassName("productsSelect")[i][0].value == foodList) {
-                tailingsPercent += Number(document.getElementsByClassName("percentageFood")[i].value);
+            if (document.getElementsByClassName("products-select")[i][0].value == foodList) {
+                tailingsPercent += Number(document.getElementsByClassName("percentage-food")[i].value);
             }
         }
 
@@ -210,7 +210,7 @@ function recalculateUsedProductPercent(nextId, num) {
         currentGram.value = (savedGram * currentPercent.value / 100).toFixed(0);;
 
         if (percentField.innerText != 0) {
-            let typesFood = document.getElementsByClassName("foodItem")[num];
+            let typesFood = document.getElementsByClassName("food-item")[num];
             typesFood.style = "background-color: #FFF4E2;";
             chosenProducts[num] = false;
         }
@@ -227,7 +227,7 @@ async function removeFood(deleteNum, unblockNum) {
     let parent = deleteDiv.parentNode;
     parent.removeChild(deleteDiv);
 
-    let typesFood = document.getElementsByClassName("foodItem")[unblockNum];
+    let typesFood = document.getElementsByClassName("food-item")[unblockNum];
     typesFood.style = "background-color: #FFF4E2;";
     chosenProducts[unblockNum] = false;
 
@@ -240,7 +240,7 @@ async function saveMenu() {
     document.getElementById("successMessage").innerText = "";
     let productsQuantity = [];
     for (let i = 0; i < 4; i++) {
-        const myElement = document.getElementsByClassName("productsDiv")[i];
+        const myElement = document.getElementsByClassName("products-list-div")[i];
         let chosenProductsProducts = [0, 0, 0, 0];
         
         for (const child of myElement.children) {
@@ -260,7 +260,7 @@ async function saveMenu() {
     let foodSupper = {};
     for (let i = 0; i <  totalProductsQuantity; i++) {
         if (i < productsQuantity[0]) {
-            let foodName = document.getElementsByClassName("productsSelect")[i];
+            let foodName = document.getElementsByClassName("products-select")[i];
             let food = foodName.options[foodName.selectedIndex].text;
             if (foodBreakfast[food]) {
                 foodBreakfast[food] = Number(foodBreakfast[food]) + Number(document.getElementById(`gram_${i}`).value);

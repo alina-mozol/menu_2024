@@ -6,9 +6,7 @@
         <title>Menu</title>
         <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
         <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="../css/header.css">
-        <link rel="stylesheet" href="../css/createMenu.css">
-        <script type="text/javascript" src="../js/createMenu.js"></script>
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
         <header>
@@ -26,9 +24,9 @@
                     </div>
                 </div>
                 <div id="searchCheckbox">
-                    <input type="checkbox" id="recipeCheckbox" class="checkboxSearch" name="recipeCheckbox" checked disabled>
+                    <input type="checkbox" id="recipeCheckbox" class="checkbox-search" name="recipeCheckbox" checked disabled>
                     <label for="recipeCheckbox">Search by food name</label>
-                    <input type="checkbox" id="productCheckbox" class="checkboxSearch" name="productCheckbox" disabled>
+                    <input type="checkbox" id="productCheckbox" class="checkbox-search" name="productCheckbox" disabled>
                     <label for="productCheckbox">Search by ingredients</label>
                 </div>
             </div>
@@ -69,115 +67,115 @@
         <h1 id="mainText">Create a menu</h1>
         <main>
             <container id="leftSidebar">
-                <div class="containerName">Day types of food</div>
-                <div class="containerFood">
-                    <div class="foodItem" onclick="moveFood(0);">
+                <div class="container-name">Day types of food</div>
+                <div class="container-food">
+                    <div class="food-item" onclick="moveFood(0);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(1);">
+                    <div class="food-item" onclick="moveFood(1);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(2);">
+                    <div class="food-item" onclick="moveFood(2);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(3);">
+                    <div class="food-item" onclick="moveFood(3);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(4);">
+                    <div class="food-item" onclick="moveFood(4);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(5);">
+                    <div class="food-item" onclick="moveFood(5);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(6);">
+                    <div class="food-item" onclick="moveFood(6);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(7);">
+                    <div class="food-item" onclick="moveFood(7);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(8);">
+                    <div class="food-item" onclick="moveFood(8);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(9);">
+                    <div class="food-item" onclick="moveFood(9);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(10);">
+                    <div class="food-item" onclick="moveFood(10);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(11);">
+                    <div class="food-item" onclick="moveFood(11);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="foodItem" onclick="moveFood(12);">
+                    <div class="food-item" onclick="moveFood(12);">
                         <div class="food"></div>
-                        <div class="percentTailings">
+                        <div class="percent-tailings">
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
                     </div>
                 </div>
             </container>
-            <container id="mainContent">
-                <div class="mealName">Breakfast</div>
-                <div class="productsDiv"></div>
-                <div class="mealName">Dinner</div>
-                <div class="productsDiv"></div>
-                <div class="mealName">Snack</div>
-                <div class="productsDiv"></div>
-                <div class="mealName">Supper</div>
-                <div class="productsDiv"></div>
+            <container id="mainContentPage">
+                <div class="meal-name">Breakfast</div>
+                <div class="products-list-div"></div>
+                <div class="meal-name">Dinner</div>
+                <div class="products-list-div"></div>
+                <div class="meal-name">Snack</div>
+                <div class="products-list-div"></div>
+                <div class="meal-name">Supper</div>
+                <div class="products-list-div"></div>
                 <button id="result" type="button" onclick="saveMenu()">Save</button>
                 <div id="successMessage"></div>
             </container>
             <container id="rightSidebar">
-                <div class="containerName">Choose a recipe</div>
+                <div class="container-name">Choose a recipe</div>
                 <div id="rightSidebarDiv">
                     <div>
                         <img id="addIcon" src="../img/add.png" alt="add recipe" onclick="">
@@ -186,5 +184,6 @@
                 </div>
             </container>
         </main>
-</body>
+        <script type="text/javascript" src="../js/createMenu.js"></script>
+    </body>
 </html>

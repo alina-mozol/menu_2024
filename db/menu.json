@@ -50,5 +50,25 @@
       "cucumber": "300",
       "avocado": "43"
     }
+  },
+  "1721849179819": {
+    "breakfast": {},
+    "dinner": {
+      "i) Fruits and berries": ""
+    },
+    "snack": {
+      "l) Vegetables and mushrooms": ""
+    },
+    "supper": {
+      "m) Fats": ""
+    }
+  },
+  "1721851019747": {
+    "breakfast": {
+      "cereals": "33"
+    },
+    "dinner": {},
+    "snack": {},
+    "supper": {}
   }
 }
