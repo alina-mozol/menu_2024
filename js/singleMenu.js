@@ -29,7 +29,7 @@ function showMenu() {
             if (prop === "eggs") {
                 unit = "pieces";
             } else {
-                unit = "gramms";
+                unit = "grams";
             }
             menuRow.innerText = `${prop} ${breakfastValue[prop]} ${unit}`;
             breakfastDiv.appendChild(menuRow);
@@ -43,7 +43,7 @@ function showMenu() {
             if (prop === "eggs") {
                 unit = "pieces";
             } else {
-                unit = "gramms";
+                unit = "grams";
             }
             menuRow.innerText = `${prop} ${dinnerValue[prop]} ${unit}`;
             dinnerDiv.appendChild(menuRow);
@@ -57,7 +57,7 @@ function showMenu() {
             if (prop === "eggs") {
                 unit = "pieces";
             } else {
-                unit = "gramms";
+                unit = "grams";
             }
             menuRow.innerText = `${prop} ${snackValue[prop]} ${unit}`;
             snackDiv.appendChild(menuRow);
@@ -71,7 +71,7 @@ function showMenu() {
             if (prop === "eggs") {
                 unit = "pieces";
             } else {
-                unit = "gramms";
+                unit = "grams";
             }
             menuRow.innerText = `${prop} ${supperValue[prop]} ${unit}`;
             supperDiv.appendChild(menuRow);
@@ -93,7 +93,7 @@ function showProductsList() {
             if (prop === "eggs") {
                 unit = "pieces";
             } else {
-                unit = "gramms";
+                unit = "grams";
             }
 
             let alreadyAdded = false;
@@ -123,7 +123,7 @@ function showProductsList() {
             if (prop === "eggs") {
                 unit = "pieces";
             } else {
-                unit = "gramms";
+                unit = "grams";
             }
 
             let alreadyAdded = false;
@@ -153,7 +153,7 @@ function showProductsList() {
             if (prop === "eggs") {
                 unit = "pieces";
             } else {
-                unit = "gramms";
+                unit = "grams";
             }
 
             let alreadyAdded = false;
@@ -183,7 +183,7 @@ function showProductsList() {
             if (prop === "eggs") {
                 unit = "pieces";
             } else {
-                unit = "gramms";
+                unit = "grams";
             }
 
             let alreadyAdded = false;

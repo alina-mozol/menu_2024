@@ -18,6 +18,7 @@ async function showProducts() {
 }
 
 let chosenProducts = [false, false, false, false, false, false, false, false, false, false, false, false, false];
+let nextId;
 
 // method to choose a products for recipe
 async function moveFood(num) {
@@ -33,17 +34,7 @@ async function moveFood(num) {
                         classIndex = index;
                             
                         let divFood = document.createElement("div"); // create a product div in the recipe block
-                        let text;
-                        if (Object.keys(value[num]) == 'f) Vegetables and mushrooms' || Object.keys(value[num]) == 'l) Vegetables and mushrooms') {
-                            text = document.createElement("textarea");
-                            text.setAttribute("rows", 4);
-                            text.placeholder = "Enter vegetables and mushrooms. Max quantity - 300 gramms";
-                        } else {
-                            text = document.createElement("select");
-                            text.addEventListener("click", () => {
-                                changeOption(num, divLength);
-                            })
-                        }
+                        let text = document.createElement("select");
                         let gram = document.createElement("input");
                         let gramText = document.createElement("div");
                         let percentage = document.createElement("input");
@@ -58,35 +49,30 @@ async function moveFood(num) {
                         percentText.className = "percentText";
                         close.className = "closeBtn";
 
-                        let divLength = document.getElementsByClassName("productsList").length; // get a next number for IDs of the created elements
-                        if (divLength === undefined) {
-                            divLength = 0;
+                        if (nextId === undefined) {
+                            nextId = 0;
                         } else {
-                            divLength += 1; 
+                            nextId += 1; 
                         }
-                        divFood.id = `createdFood_${divLength}`;
-                        gram.id = `gram_${divLength}`;
-                        percentage.id = `percentage_${divLength}`;
-                        text.id = `text_${divLength}`;
+                        divFood.id = `createdFood_${nextId}`;
+                        gram.id = `gram_${nextId}`;
+                        percentage.id = `percentage_${nextId}`;
+                        text.id = `text_${nextId}`;
 
                         gram.disabled = true; // disable input fields before choosing an option
                         percentage.disabled = true;
 
-                        if (divLength > 3) { // increase a recipe block after adding a new product
+                        if (nextId > 3) { // increase a recipe block after adding a new product
                             let currentHeight = productsDiv[`${classIndex}`].clientHeight + 23;
                             productsDiv[`${classIndex}`].style = `height: ${currentHeight}px`; 
                         }
 
                         close.innerText = "X"; // add close button to delete the chosen product
-                        close.setAttribute("onclick", `removeFood(${divLength}, ${num});`);
+                        close.setAttribute("onclick", `removeFood(${nextId}, ${num});`);
+                        text.setAttribute("onclick", `changeOption(${num}, ${nextId});`);
+                        gram.setAttribute("oninput", `changeGrams(${nextId}, ${num});`);
+                        percentage.setAttribute("oninput", `changePercentage(${nextId}, ${num});`);
 
-                        gram.addEventListener("input", function(){
-                            listenEventsGram(divLength, num);
-                        });
-
-                        percentage.addEventListener("input", function(){
-                            listenEventsPercentage(divLength, num);
-                        });
                         productsDiv[`${classIndex}`].appendChild(divFood);
 
                         let defaultOption = document.createElement("option"); // show default option to the product dropdown list
@@ -115,7 +101,7 @@ async function moveFood(num) {
                     }
                 })
             });
-            let typesFood = document.getElementsByClassName("food")[num];
+            let typesFood = document.getElementsByClassName("foodItem")[num];
             typesFood.style = "background-color: #cccccc9e;";
             chosenProducts[num] = true;
         })
@@ -123,69 +109,130 @@ async function moveFood(num) {
 }
 
 // method to display grams after choosing product option in dropdown list
-async function changeOption(num, divLength) {
-    document.getElementById(`gram_${divLength}`).disabled = false;
-    document.getElementById(`percentage_${divLength}`).disabled = false;
-
-    let selectedOptionValue = document.getElementById(`text_${divLength}`).value;
-
-    await getData('http://localhost:3000/getDataProducts').then((value) => {
-        let savedGram = Object.values(Object.values(value[num])[0][selectedOptionValue]);
-        let gramInput = document.getElementById(`gram_${divLength}`);
-        gramInput.value = savedGram;
-        let percentageInput = document.getElementById(`percentage_${divLength}`);
-        percentageInput.value = 100;
-    })
-}
-
-// method to recalculate percents of product after changing grams of the product
-async function listenEventsGram(divLength, num) {
-    let selectedOptionValue = document.getElementById(`text_${divLength}`).value;
+async function changeOption(num, nextIdNumber) {
+    document.getElementById(`gram_${nextIdNumber}`).disabled = false;
+    document.getElementById(`percentage_${nextIdNumber}`).disabled = false;
+    let selectedOptionValue = document.getElementById(`text_${nextIdNumber}`).value;
 
     await getData('http://localhost:3000/getDataProducts').then((value) => {
         let savedGram = Object.values(Object.values(value[num])[0][selectedOptionValue]);
-        let gramInput = document.getElementById(`gram_${divLength}`).value;
+        let percentField = document.getElementsByClassName("foodPercent")[num];
+        let percentageInput = document.getElementById(`percentage_${nextIdNumber}`);
+        if (percentField.innerText == 0) {
+            percentageInput.value = document.getElementById(`percentage_${nextIdNumber}`).value;
+        } else {
+            percentageInput.value = percentField.innerText;
+        }
+            
+        let gramInput = document.getElementById(`gram_${nextIdNumber}`);
+        gramInput.value = (savedGram * percentageInput.value / 100).toFixed(0);
+        
+        let usedProductLength = document.getElementsByClassName("productsList"); // all chosen products
+        let currentPercent = document.getElementsByClassName("percentageFood"); // percent of current product
 
-        let percentageInput = document.getElementById(`percentage_${divLength}`);
-        let newPercentage = gramInput / savedGram *100;
+        let foodList = document.getElementsByClassName("food")[num].innerText; // name of current product
+        let tailingsPercent = 0;
+        for (let i = 0; i < usedProductLength.length; i++) {
+            if (document.getElementsByClassName("productsSelect")[i][0].value == foodList) {
+                tailingsPercent += Number(currentPercent[i].value);
+            }
+        }
+        percentField.innerText = (100 - tailingsPercent).toFixed(0);
 
-        percentageInput.value = newPercentage.toFixed(0);
-
-        if (newPercentage > 100) {
-            document.getElementById(`gram_${divLength}`).value = savedGram;
-            percentageInput.value = 100;
+        if (percentField.innerText == 0) {
+            let typesFood = document.getElementsByClassName("foodItem")[num];
+            typesFood.style = "background-color: #cccccc9e;";
+            chosenProducts[num] = true;
         }
     })
 }
 
 // method to recalculate grams of product after changing percents of the product
-async function listenEventsPercentage(divLength, num) {
-    let selectedOptionValue = document.getElementById(`text_${divLength}`).value;
+async function changePercentage(nextId, num) {
+    let typesFood = document.getElementsByClassName("foodItem")[num];
+    typesFood.style = "background-color: #cccccc9e;";
+    chosenProducts[num] = true;
 
     await getData('http://localhost:3000/getDataProducts').then((value) => {
-        let savedGram = Object.values(Object.values(value[num])[0][selectedOptionValue]);
-        let gramInput = document.getElementById(`gram_${divLength}`);
+        let selectedOptionValue = document.getElementById(`text_${nextId}`).value;
+        let savedGram = Object.values(Object.values(value[num])[0][selectedOptionValue])[0]; // from api
+        let currentPercent = document.getElementById(`percentage_${nextId}`).value; // percent of current product
 
-        let percentageInput = document.getElementById(`percentage_${divLength}`);
-        let newGram = percentageInput.value / 100 * savedGram;
-        gramInput.value = newGram;
+        document.getElementById(`gram_${nextId}`).value = (savedGram * currentPercent / 100).toFixed(0);
+        recalculateUsedProductPercent(nextId, num);
+    })
+}
 
-        if (percentageInput.value > 100) {
-            document.getElementById(`gram_${divLength}`).value = savedGram;
-            percentageInput.value = 100;
+// method to recalculate percents of product after changing grams of the product
+async function changeGrams(nextId, num) {
+    let typesFood = document.getElementsByClassName("foodItem")[num];
+    typesFood.style = "background-color: #cccccc9e;";
+    chosenProducts[num] = true;
+
+    await getData('http://localhost:3000/getDataProducts').then((value) => {
+        let selectedOptionValue = document.getElementById(`text_${nextId}`).value;
+        let savedGram = Object.values(Object.values(value[num])[0][selectedOptionValue])[0]; // from api
+        let currentGram = document.getElementById(`gram_${nextId}`).value; // grams of current product
+
+        document.getElementById(`percentage_${nextId}`).value= (currentGram / savedGram * 100).toFixed(0);
+        recalculateUsedProductPercent(nextId, num);
+    })
+}
+
+// for recalculating quantity of the non-used grams 
+function recalculateUsedProductPercent(nextId, num) {
+    getData('http://localhost:3000/getDataProducts').then((value) => {
+        let selectedOptionValue = document.getElementById(`text_${nextId}`).value;
+        let savedGram = Object.values(Object.values(value[num])[0][selectedOptionValue])[0]; // from api
+        let percentField = document.getElementsByClassName("foodPercent")[num]; // percent at left sidebar
+        let usedProductLength = document.getElementsByClassName("productsList"); // all chosen products
+        let currentGram = document.getElementById(`gram_${nextId}`); // grams of current product
+        let currentPercent = document.getElementById(`percentage_${nextId}`); // percent of current product
+
+        let foodList = document.getElementsByClassName("food")[num].innerText; // name of current product
+        let tailingsPercent = 0;
+
+        for (let i = 0; i < usedProductLength.length; i++) {
+            if (document.getElementsByClassName("productsSelect")[i][0].value == foodList) {
+                tailingsPercent += Number(document.getElementsByClassName("percentageFood")[i].value);
+            }
+        }
+
+        if (tailingsPercent > 100) {
+            currentPercent.value = (currentPercent.value - (tailingsPercent - 100)).toFixed(0);
+            percentField.innerText = 0;
+        } else if (tailingsPercent < 100) {
+            percentField.innerText = (100 - tailingsPercent).toFixed(0);
+        } else if (tailingsPercent == 100) {
+            percentField.innerText = 0;
+        }
+
+        currentGram.value = (savedGram * currentPercent.value / 100).toFixed(0);;
+
+        if (percentField.innerText != 0) {
+            let typesFood = document.getElementsByClassName("foodItem")[num];
+            typesFood.style = "background-color: #FFF4E2;";
+            chosenProducts[num] = false;
         }
     })
 }
 
 // method to remove chosen product from recipe
 async function removeFood(deleteNum, unblockNum) {
+    let percentSidebar = document.getElementsByClassName("foodPercent")[unblockNum]; // sidebar
+    percentSidebar.innerText = Number(percentSidebar.innerText);
+    let deletedPercent = document.getElementById(`percentage_${deleteNum}`).value;
+
     let deleteDiv = document.getElementById(`createdFood_${deleteNum}`);
     let parent = deleteDiv.parentNode;
     parent.removeChild(deleteDiv);
 
-    let typesFood = document.getElementsByClassName("food")[unblockNum];
+    let typesFood = document.getElementsByClassName("foodItem")[unblockNum];
     typesFood.style = "background-color: #FFF4E2;";
     chosenProducts[unblockNum] = false;
+
+    let initialPercents = document.getElementsByClassName("foodPercent")[unblockNum];
+    initialPercents.innerText = Number(initialPercents.innerText) + Number(deletedPercent);
 }
 
 // method to save ready menu
@@ -194,12 +241,12 @@ async function saveMenu() {
     let productsQuantity = [];
     for (let i = 0; i < 4; i++) {
         const myElement = document.getElementsByClassName("productsDiv")[i];
-        let countProducts = [0, 0, 0, 0];
+        let chosenProductsProducts = [0, 0, 0, 0];
         
         for (const child of myElement.children) {
-            countProducts[i] += 1;
+            chosenProductsProducts[i] += 1;
         }
-        productsQuantity.push(countProducts[i])
+        productsQuantity.push(chosenProductsProducts[i])
     }
 
     let totalProductsQuantity = 0;
@@ -211,55 +258,38 @@ async function saveMenu() {
     let foodDinner = {};
     let foodSnack = {};
     let foodSupper = {};
-    for (let i = 1; i <  totalProductsQuantity + 1; i++) {
-        if (i < productsQuantity[0] + 1) {
-            let foodName = document.getElementById(`text_${i}`);
-            if (foodName.placeholder == 'Enter vegetables and mushrooms. Max quantity - 300 gramms') {
-                foodBreakfast[foodName.value] = "300";
+    for (let i = 0; i <  totalProductsQuantity; i++) {
+        if (i < productsQuantity[0]) {
+            let foodName = document.getElementsByClassName("productsSelect")[i];
+            let food = foodName.options[foodName.selectedIndex].text;
+            if (foodBreakfast[food]) {
+                foodBreakfast[food] = Number(foodBreakfast[food]) + Number(document.getElementById(`gram_${i}`).value);
             } else {
-                let food = foodName.options[foodName.selectedIndex].text;
-                if (foodBreakfast[food]) {
-                    foodBreakfast[food] = Number(foodBreakfast[food]) + Number(document.getElementById(`gram_${i}`).value);
-                } else {
-                    foodBreakfast[food] = document.getElementById(`gram_${i}`).value;
-                }
+                foodBreakfast[food] = document.getElementById(`gram_${i}`).value;
             }
-        } else if (i >= (productsQuantity[0] + 1) && i < (productsQuantity[0] + productsQuantity[1] + 1)) {
+        } else if (i >= productsQuantity[0] && i < (productsQuantity[0] + productsQuantity[1])) {
                 let foodName = document.getElementById(`text_${i}`);
-                if (foodName.placeholder == 'Enter vegetables and mushrooms. Max quantity - 300 gramms') {
-                    foodDinner[foodName.value] = "300";
-                } else {
-                    let food = foodName.options[foodName.selectedIndex].text;
-                    if (foodDinner[food]) {
-                        foodDinner[food] = Number(foodDinner[food]) + Number(document.getElementById(`gram_${i}`).value);
-                    } else {
-                        foodDinner[food] = document.getElementById(`gram_${i}`).value;
-                    }
-                }
-        } else if (i >= (productsQuantity[0] + productsQuantity[1] + 1) && (i < productsQuantity[0] + productsQuantity[1] + productsQuantity[2] + 1)) {
-            let foodName = document.getElementById(`text_${i}`);
-            if (foodName.placeholder == 'Enter vegetables and mushrooms. Max quantity - 300 gramms') {
-                console.log(i, foodName)
-                foodSnack[foodName.value] = "300";
-            } else {
                 let food = foodName.options[foodName.selectedIndex].text;
-                if (foodSnack[food]) {
-                    foodSnack[food] = Number(foodSnack[food]) + Number(document.getElementById(`gram_${i}`).value);
+                if (foodDinner[food]) {
+                    foodDinner[food] = Number(foodDinner[food]) + Number(document.getElementById(`gram_${i}`).value);
                 } else {
-                    foodSnack[food] = document.getElementById(`gram_${i}`).value;
+                    foodDinner[food] = document.getElementById(`gram_${i}`).value;
                 }
+        } else if (i >= (productsQuantity[0] + productsQuantity[1]) && (i < productsQuantity[0] + productsQuantity[1] + productsQuantity[2])) {
+            let foodName = document.getElementById(`text_${i}`);
+            let food = foodName.options[foodName.selectedIndex].text;
+            if (foodSnack[food]) {
+                foodSnack[food] = Number(foodSnack[food]) + Number(document.getElementById(`gram_${i}`).value);
+            } else {
+                foodSnack[food] = document.getElementById(`gram_${i}`).value;
             }
-        } else if (i >= (productsQuantity[0] + productsQuantity[1] + productsQuantity[2] + 1)) {
+        } else if (i >= (productsQuantity[0] + productsQuantity[1] + productsQuantity[2])) {
             let foodName = document.getElementById(`text_${i}`);
-            if (foodName.placeholder == 'Enter vegetables and mushrooms. Max quantity - 300 gramms') {
-                foodSupper[foodName.value] = "300";
+            let food = foodName.options[foodName.selectedIndex].text;
+            if (foodSupper[food]) {
+                foodSupper[food] = Number(foodSupper[food]) + Number(document.getElementById(`gram_${i}`).value);
             } else {
-                let food = foodName.options[foodName.selectedIndex].text;
-                if (foodSupper[food]) {
-                    foodSupper[food] = Number(foodSupper[food]) + Number(document.getElementById(`gram_${i}`).value);
-                } else {
-                    foodSupper[food] = document.getElementById(`gram_${i}`).value;
-                }
+                foodSupper[food] = document.getElementById(`gram_${i}`).value;
             }
         }    
     }
@@ -272,7 +302,6 @@ async function saveMenu() {
         "snack": foodSnack,
         "supper": foodSupper
     }
-    console.log(foods)
 
     await getData('http://localhost:3000/getMenu').then((value) => {
         value[`${timestamp}`] = foods;

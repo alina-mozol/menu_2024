@@ -318,5 +318,61 @@
       "mustard": "21"
     },
     "foodSummary": "q"
+  },
+  {
+    "topic": "Перекус",
+    "recipeName": "q",
+    "imgData": "q",
+    "products": {
+      "b) Milk / kefir / yogurt": ""
+    },
+    "foodSummary": "q"
+  },
+  {
+    "topic": "Сніданок",
+    "recipeName": "Fried eggs",
+    "imgData": "link",
+    "products": {
+      "eggs": "2",
+      "chicken_brest": "28",
+      "onion": "30",
+      "tomato": "150",
+      "oil": "8",
+      "eggplant": "120"
+    },
+    "foodSummary": "1. Cut\n2. Fry"
+  },
+  {
+    "topic": "Сніданок",
+    "recipeName": "Plov",
+    "imgData": "link",
+    "products": {
+      "chicken_brest": "140",
+      "onion": "50",
+      "carrot": "50",
+      "rice": "33",
+      "oil": "8"
+    },
+    "foodSummary": "1. Cut\n2. Fry\n3. Boil"
+  },
+  {
+    "topic": "Перекус",
+    "recipeName": "sdfg",
+    "imgData": "zxcvzxcvbnm",
+    "products": {
+      "kefir_2.5%": "100",
+      "snack": "55"
+    },
+    "foodSummary": "xcvbnm,"
+  },
+  {
+    "topic": "Snack",
+    "recipeName": "x",
+    "imgData": "x",
+    "products": {
+      "fish_until_5%": "32",
+      "liver": "50"
+    },
+    "foodSummary": "x"
   }
 ]
