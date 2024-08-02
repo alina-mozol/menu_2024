@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Menu</title>
+        <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+        <header>
+            <div onclick="javascript:location.href='./recipesList.html';">
+                <img id="logo2" src="../img/logo2.png">
+                <img id="logo" src="../img/logo.png">
+            </div>
+            <div id="rightSideHeader">
+                <div id="searchContainer">
+                    <div id="searchDiv">
+                        <input type="text" id="searchField" placeholder="Пошук ..." list="theList">
+                    </div>
+                    <div id="searchBtn" href="./recipesList.html" onclick="searchRecipe();">
+                      <img id="searchImg" src="../img/search.png" alt="Пошук">
+                    </div>
+                </div>
+                <div id="searchCheckbox">
+                    <input type="checkbox" id="recipeCheckbox" class="checkbox-search" name="recipeCheckbox" checked disabled>
+                    <label for="recipeCheckbox">Пошук по назві</label>
+                    <input type="checkbox" id="productCheckbox" class="checkbox-search" name="productCheckbox" disabled>
+                    <label for="productCheckbox">Пошук по інгредієнтам</label>
+                </div>
+            </div>
+        </header>
+        <hr>
+        <nav>
+            <li><a href="./recipesList.html" onclick="displayRecipes('Рецепти'); showRecipes();">Рецепти</a>
+                <ul class="mealWrapperNav">
+                    <li><a href="#" onclick="displayRecipes('Сніданок'); showRecipes();">Сніданок</a></li>
+                    <li><a href="#" onclick="displayRecipes('Обід'); showRecipes();">Обід</a>
+                    <li><a href="#" onclick="displayRecipes('Перекус'); showRecipes();">Перекус</a></li>
+                    <li><a href="#" onclick="displayRecipes('Вечеря'); showRecipes();">Вечеря</a></li>
+                    <li><a href="#" onclick="displayRecipes('Свято'); showRecipes();">Свято</a></li>
+                </ul>
+            </li>
+            <li><a href="./createMenu.html">Скласти меню</a></li>
+            <li><a href="./menuArchive.html">Архів меню</a></li>
+            <li><a href="./addNewRecipe.html">Додати рецепт</a></li>
+        </nav>
+        <hr>
+        <h1 id="mainText">Рецепти</h1>
+        <div id="pageContent">
+            <container id="mainRecipeContainer"></container>
+            <container id="rightSidebar">
+                <div class="container-name">Обрані рецепти</div>
+                <div id="rightSidebarRecipeDiv"></div>
+            </container>
+        </div>
+        <script type="text/javascript" src="../js/recipesList.js"></script>
+        <script type="text/javascript" src="../js/searchFoodModule.js"></script>
+    </body>
+</html>

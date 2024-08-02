@@ -1,5 +1,6 @@
 window.onload = function() {
     showProducts();
+    showAddedRecipes();
 }
 
 async function getData(url) {
@@ -62,11 +63,6 @@ async function moveFood(num) {
                         gram.disabled = true; // disable input fields before choosing an option
                         percentage.disabled = true;
 
-                        if (nextId > 3) { // increase a recipe block after adding a new product
-                            let currentHeight = productsDiv[`${classIndex}`].clientHeight + 23;
-                            productsDiv[`${classIndex}`].style = `height: ${currentHeight}px`; 
-                        }
-
                         close.innerText = "X"; // add close button to delete the chosen product
                         close.setAttribute("onclick", `removeFood(${nextId}, ${num});`);
                         text.setAttribute("onclick", `changeOption(${num}, ${nextId});`);
@@ -89,7 +85,7 @@ async function moveFood(num) {
                             text.appendChild(option);
                         }
 
-                        gramText.innerText = "gr ";
+                        gramText.innerText = "гр ";
                         percentText.innerText = "% ";
 
                         divFood.appendChild(text);
@@ -174,7 +170,7 @@ async function changeGrams(nextId, num) {
         let savedGram = Object.values(Object.values(value[num])[0][selectedOptionValue])[0]; // from api
         let currentGram = document.getElementById(`gram_${nextId}`).value; // grams of current product
 
-        document.getElementById(`percentage_${nextId}`).value= (currentGram / savedGram * 100).toFixed(0);
+        document.getElementById(`percentage_${nextId}`).value= (currentGram / savedGram * 100).toFixed(1);
         recalculateUsedProductPercent(nextId, num);
     })
 }
@@ -207,7 +203,7 @@ function recalculateUsedProductPercent(nextId, num) {
             percentField.innerText = 0;
         }
 
-        currentGram.value = (savedGram * currentPercent.value / 100).toFixed(0);;
+        currentGram.value = (savedGram * currentPercent.value / 100).toFixed();;
 
         if (percentField.innerText != 0) {
             let typesFood = document.getElementsByClassName("food-item")[num];
@@ -235,9 +231,162 @@ async function removeFood(deleteNum, unblockNum) {
     initialPercents.innerText = Number(initialPercents.innerText) + Number(deletedPercent);
 }
 
+// show already chosen recipes
+function showAddedRecipes() {
+    getData('http://localhost:3000/getSavedRecipes').then((value) => {
+        for (let index = 0; index < value.length; index++) {
+            let rightSidebarDiv = document.getElementById("rightSidebarDiv");
+            let addedRecipeDiv = document.createElement("div"); // create new div with recipe 
+            addedRecipeDiv.className = "added-recipe-div";
+            rightSidebarDiv.appendChild(addedRecipeDiv);
+
+            let nameRecipeDiv = document.createElement("div"); // create common div for name and button 
+            nameRecipeDiv.className = "name-recipe-div";
+            addedRecipeDiv.appendChild(nameRecipeDiv);
+        
+            let addedRecipe = document.createElement("div"); // create new recipe name
+            addedRecipe.className = "added-recipe";
+            let recipeName = value[index].recipeName;
+            addedRecipe.setAttribute("onclick", `expandRecipe("${recipeName}");`);
+            addedRecipe.innerText = recipeName;
+            nameRecipeDiv.appendChild(addedRecipe);
+
+            let closeBtn = document.createElement("div"); // add close button to delete chosen recipe
+            closeBtn.className = "close-btn";
+            closeBtn.setAttribute("onclick", `removeRecipe("${recipeName}");`);
+            nameRecipeDiv.appendChild(closeBtn);       
+            let closeImg = document.createElement("img");
+            closeImg.className = "close-img";
+            closeImg.setAttribute("src", "../img/close.png");
+            closeBtn.appendChild(closeImg);     
+        }
+    })
+}
+
+// show full information of the chosen recipe
+function expandRecipe(recipe) {
+    let addedRecipes = document.getElementsByClassName("added-recipe");
+    for (let index = 0; index < addedRecipes.length; index++) {
+        if (recipe == addedRecipes[index].innerText) {
+            let allRecipeDiv = document.getElementsByClassName("products-recipe-div")[0]; // delete div with previously shown recipes
+            if (allRecipeDiv) {
+                allRecipeDiv.remove();
+            } else {
+                let addedRecipesDiv = document.getElementsByClassName("added-recipe-div")[index];
+                getData('http://localhost:3000/getSavedRecipes').then((value) => {
+                    let nameRecipeDiv = document.getElementsByClassName("name-recipe-div")[index]; // create common div for name and button
+                    if (nameRecipeDiv.childNodes.length <= 2) {
+                        let copyBtn = document.createElement("div"); // add copy button to copy chosen recipe
+                        copyBtn.className = "copy-btn";
+                        copyBtn.setAttribute("onclick", `copyRecipe("${recipe}");`);
+                        nameRecipeDiv.appendChild(copyBtn);
+                        let copyImg = document.createElement("img"); // add copy button to copy chosen recipe
+                        copyImg.className = "copy-img";
+                        copyImg.setAttribute("src", "../img/copy.svg");
+                        copyBtn.appendChild(copyImg);
+                    }
+                    
+                    let productsRecipeDiv = document.createElement("div"); // create new div with recipe description 
+                    productsRecipeDiv.className = "products-recipe-div";
+                    addedRecipesDiv.appendChild(productsRecipeDiv);
+                    
+                    let productsRecipeList = document.createElement("div"); // create new products div
+                    productsRecipeList.className = "products-recipe-list";
+                    productsRecipeDiv.appendChild(productsRecipeList);
+
+                    for (const prop in value[index].products) { // add products into products div
+                        let productRow = document.createElement("li");
+                        productRow.className = "list-row";
+                        let unit;
+                        if (prop === "яйця") {
+                            unit = "шт";
+                        } else {
+                            unit = "гр";
+                        }
+                        productRow.innerText = `${prop} ${value[index].products[prop]} ${unit}`;
+                        productsRecipeList.appendChild(productRow);
+                    }
+                    
+                    let descriptionDiv = document.createElement("div"); // add recipe description
+                    descriptionDiv.className = "description-recipe";
+                    descriptionDiv.innerText = value[index].foodSummary; 
+                    productsRecipeDiv.appendChild(descriptionDiv);            
+                })
+            }
+        }
+    }
+}
+
+// remove added recipe from the right side of the page
+async function removeRecipe(name) {
+    let rightSidebarDiv = document.getElementById("rightSidebarDiv");
+    let addedRecipes = document.getElementsByClassName("added-recipe");
+
+    for (let index = 0; index < addedRecipes.length; index++) {
+        if (name == addedRecipes[index].innerText) {
+            await getData('http://localhost:3000/getSavedRecipes').then((value) => {
+                const deleteValue = value.slice(index);
+                let updateValue = [];
+                for (let i = 0; i < value.length; i++) {
+                    if (value[i] != deleteValue[0]) {
+                        updateValue.push(value[i]);
+                    }
+                }
+                const saveOp = fetch('http://localhost:3000/saveChosenRecipes', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updateValue)
+                });
+            })
+            
+            let parent = await document.getElementsByClassName("added-recipe-div");
+            rightSidebarDiv.removeChild(parent[index]);
+        }   
+    }
+}
+
+// go to Recipes page
+function chooseRecipe() {
+    location.href = "recipesList.html";
+}
+
+// copy chosen recipe to created menu
+function copyRecipe(recipeName) {
+    let productsDiv = document.querySelectorAll(".recipe-list-input");
+    let classIndex;
+    productsDiv.forEach((item, index) => {
+        item.addEventListener('click', event => {
+            classIndex = index;
+            let copiedValue;
+            let addedRecipes = document.getElementsByClassName("added-recipe");
+            for (let index = 0; index < addedRecipes.length; index++) {
+                if (recipeName == addedRecipes[index].innerText) {
+                    getData('http://localhost:3000/getSavedRecipes').then((value) => {
+                        copiedValue = value[index].recipeName + "\n";
+                        for (const prop in value[index].products) {
+                            let unit;
+                            if (prop === "яйця") {
+                                unit = "шт";
+                            } else {
+                                unit = "гр";
+                            }
+                            let product = "    • " + `${prop} ${value[index].products[prop]} ${unit}`;
+                            copiedValue += product + "\n"; 
+                        }
+                        copiedValue += value[index].foodSummary;
+                        productsDiv[`${classIndex}`].value = copiedValue;
+                    })
+                }
+            }
+        })
+    })    
+}
+
 // method to save ready menu
 async function saveMenu() {
     document.getElementById("successMessage").innerText = "";
+    document.getElementById("errorMessage").innerText = "";
+
     let productsQuantity = [];
     for (let i = 0; i < 4; i++) {
         const myElement = document.getElementsByClassName("products-list-div")[i];
@@ -253,64 +402,98 @@ async function saveMenu() {
     for (let i = 0; i <  4; i++) {
         totalProductsQuantity += productsQuantity[i];
     }
+    let addedRecipe = document.getElementsByClassName("recipe-list-input");
 
     let foodBreakfast = {};
+    let breakfastRecipe = {};
     let foodDinner = {};
+    let dinnerRecipe = {};
     let foodSnack = {};
+    let snackRecipe = {};
     let foodSupper = {};
+    let supperRecipe = {};
     for (let i = 0; i <  totalProductsQuantity; i++) {
         if (i < productsQuantity[0]) {
+            console.log(totalProductsQuantity, productsQuantity[0], productsQuantity[1], productsQuantity[2], productsQuantity[3])
             let foodName = document.getElementsByClassName("products-select")[i];
             let food = foodName.options[foodName.selectedIndex].text;
             if (foodBreakfast[food]) {
-                foodBreakfast[food] = Number(foodBreakfast[food]) + Number(document.getElementById(`gram_${i}`).value);
+                foodBreakfast[food] = Number(foodBreakfast[food]) + Number(document.getElementsByClassName("gram-food")[i].value);
             } else {
-                foodBreakfast[food] = document.getElementById(`gram_${i}`).value;
+                foodBreakfast[food] = document.getElementsByClassName("gram-food")[i].value;
             }
         } else if (i >= productsQuantity[0] && i < (productsQuantity[0] + productsQuantity[1])) {
-                let foodName = document.getElementById(`text_${i}`);
-                let food = foodName.options[foodName.selectedIndex].text;
-                if (foodDinner[food]) {
-                    foodDinner[food] = Number(foodDinner[food]) + Number(document.getElementById(`gram_${i}`).value);
-                } else {
-                    foodDinner[food] = document.getElementById(`gram_${i}`).value;
-                }
+            let foodName = document.getElementsByClassName("products-select")[i];
+            let food = foodName.options[foodName.selectedIndex].text;
+            if (foodDinner[food]) {
+                foodDinner[food] = Number(foodDinner[food]) + Number(document.getElementsByClassName("gram-food")[i].value);
+            } else {
+                foodDinner[food] = document.getElementsByClassName("gram-food")[i].value;
+            }
         } else if (i >= (productsQuantity[0] + productsQuantity[1]) && (i < productsQuantity[0] + productsQuantity[1] + productsQuantity[2])) {
-            let foodName = document.getElementById(`text_${i}`);
+            let foodName = document.getElementsByClassName("products-select")[i];
             let food = foodName.options[foodName.selectedIndex].text;
             if (foodSnack[food]) {
-                foodSnack[food] = Number(foodSnack[food]) + Number(document.getElementById(`gram_${i}`).value);
+                foodSnack[food] = Number(foodSnack[food]) + Number(document.getElementsByClassName("gram-food")[i].value);
             } else {
-                foodSnack[food] = document.getElementById(`gram_${i}`).value;
+                foodSnack[food] = document.getElementsByClassName("gram-food")[i].value;
             }
         } else if (i >= (productsQuantity[0] + productsQuantity[1] + productsQuantity[2])) {
-            let foodName = document.getElementById(`text_${i}`);
+            let foodName = document.getElementsByClassName("products-select")[i];
             let food = foodName.options[foodName.selectedIndex].text;
             if (foodSupper[food]) {
-                foodSupper[food] = Number(foodSupper[food]) + Number(document.getElementById(`gram_${i}`).value);
+                foodSupper[food] = Number(foodSupper[food]) + Number(document.getElementsByClassName("gram-food")[i].value);
             } else {
-                foodSupper[food] = document.getElementById(`gram_${i}`).value;
+                foodSupper[food] = document.getElementsByClassName("gram-food")[i].value;
             }
-        }    
+        }
     }
+
+    breakfastRecipe["Рецепт"] = addedRecipe[0].value; // save recipes
+    dinnerRecipe["Рецепт"] = addedRecipe[1].value;
+    snackRecipe["Рецепт"] = addedRecipe[2].value;
+    supperRecipe["Рецепт"] = addedRecipe[3].value;
 
     let timestamp = Date.now();
 
     let foods = {
         "breakfast": foodBreakfast,
+        "breakfastRecipe": breakfastRecipe,
         "dinner": foodDinner,
+        "dinnerRecipe": dinnerRecipe,
         "snack": foodSnack,
-        "supper": foodSupper
+        "snackRecipe": snackRecipe,
+        "supper": foodSupper,
+        "supperRecipe": supperRecipe
     }
 
-    await getData('http://localhost:3000/getMenu').then((value) => {
-        value[`${timestamp}`] = foods;
-        const saveOp = fetch('http://localhost:3000/saveMenu', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(value),
-        });
-    })
+    let message = document.createElement("div"); // add message after saved recipe
+    if (Object.keys(foodBreakfast).length === 0 && breakfastRecipe["Рецепт"] != "") {
+        message.innerText = "Рецепт додан без додавання інгредієнтів";
+        message.className = "errorMessage";
+    } else if (Object.keys(foodDinner).length === 0 && dinnerRecipe["Рецепт"] != "") {
+        message.innerText = "Рецепт додан без додавання інгредієнтів";
+        message.className = "errorMessage";
+    } else if (Object.keys(foodSnack).length === 0 && snackRecipe["Рецепт"] != "") {
+        message.innerText = "Рецепт додан без додавання інгредієнтів";
+        message.className = "errorMessage";
+    } else if (Object.keys(foodSupper).length === 0 && supperRecipe["Рецепт"] != "") {
+        message.innerText = "Рецепт додан без додавання інгредієнтів";
+        message.className = "errorMessage";
+    } else {
+        message.innerText = "Меню збережено";
+        message.className = "successMessage";
 
-    document.getElementById("successMessage").innerText = "The menu is saved";
+        await getData('http://localhost:3000/getMenu').then((value) => {
+            value[`${timestamp}`] = foods;
+            const saveOp = fetch('http://localhost:3000/saveMenu', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(value),
+            });
+        })
+    }
+    let chosenRecipe = document.getElementById("mainContentPage");
+    chosenRecipe.appendChild(message);
+    setTimeout(() => location.reload(), 5000);
 }

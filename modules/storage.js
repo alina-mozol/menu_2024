@@ -2,9 +2,7 @@ const fs = require("fs");
 const DB_PATH = `${__dirname}/../db/recipes.json`;
 const DB_PATH_PRODUCTS = `${__dirname}/../db/products.json`;
 const DB_PATH_MENU = `${__dirname}/../db/menu.json`;
-// const DB_PATH_MENU_CHILD = `${__dirname}/../db/menu_child.json`;
-// const DB_PATH_LIST = `${__dirname}/../db/menu_list.json`;
-// const DB_PATH_LIST_CHILDREN = `${__dirname}/../db/menu_list_children.json`;
+const DB_PATH_SAVED_RECIPES = `${__dirname}/../db/saved_recipes.json`;
 
 const getDataProducts = async () => {
     const data = fs.readFileSync(DB_PATH_PRODUCTS);
@@ -13,6 +11,11 @@ const getDataProducts = async () => {
 
 const getData = async () => {
     const data = fs.readFileSync(DB_PATH);
+    return JSON.parse(data);
+}
+
+const getSavedRecipes = async () => {
+    const data = fs.readFileSync(DB_PATH_SAVED_RECIPES);
     return JSON.parse(data);
 }
 
@@ -30,6 +33,22 @@ const saveDataMenu = async ({
     fs.writeFileSync(DB_PATH_MENU, JSON.stringify( request.body, null, 2));
     return { status: "Saved" };
 }
+
+const saveChosenRecipes = async ({
+    request,
+  }) => {
+    // const oldData = await getSavedRecipes();
+    fs.writeFileSync(DB_PATH_SAVED_RECIPES, JSON.stringify( request.body, null, 2));
+    return { status: "Saved" };
+}
+
+// const saveChosenRecipes = async ({
+//     request,
+//   }) => {
+//     // const oldData = await getSavedRecipes();
+//     fs.writeFileSync(DB_PATH, JSON.stringify( request.body, null, 2));
+//     return { status: "Saved" };
+// }
 
 // const updateMenuList = async (num) => {
 //     let menuList = JSON.parse(await fs.readFileSync(DB_PATH_LIST));
@@ -123,17 +142,11 @@ const checkForWork = () => {
 }
 
 module.exports = {
-    getDataProducts,
     saveData,
     saveDataMenu,
-    // saveNewMenu,
-    // updateMenu,
-    // saveProducrsList,
-    // checkForWork,
+    saveChosenRecipes,
     getData,
     getDataMenu,
-    // getSavedMenu,
-    // getSavedMenuList,
-    // getSavedList,
-    // getChildrenSavedMenu
+    getSavedRecipes,
+    getDataProducts
 }

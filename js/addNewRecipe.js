@@ -87,7 +87,7 @@ async function moveFood(num) {
                 text.appendChild(option);
             }
 
-            gramText.innerText = "gr ";
+            gramText.innerText = "гр ";
             percentText.innerText = "% ";
 
             divFood.appendChild(text);
@@ -150,7 +150,7 @@ async function changePercentage(nextId, num) {
         let savedGram = Object.values(Object.values(value[num])[0][selectedOptionValue])[0]; // from api
         let currentPercent = document.getElementById(`percentage_${nextId}`).value; // percent of current product
 
-        document.getElementById(`gram_${nextId}`).value = (savedGram * currentPercent / 100).toFixed(0);
+        document.getElementById(`gram_${nextId}`).value = (savedGram * currentPercent / 100).toFixed(1);
         recalculateUsedProductPercent(nextId, num);
     })
 }
@@ -237,10 +237,11 @@ async function saveRecipe() {
     let foodSummary = document.getElementById("foodSummary").value;
     let food = document.getElementsByClassName("products-select");
 
+    let successAdded;
     if (topic === "Обрати тему" || recipeName === "" || imgLink === 0 || foodSummary === "") {
-    	document.getElementById("errorMessage").innerText = "Fill the required fields!"
+        successAdded = false;
     } else {
-        document.getElementById("errorMessage").innerText = "";
+        successAdded = true;
 
         let foodObj = {};
         for (let i = 0; i < food.length; i++) {
@@ -261,7 +262,18 @@ async function saveRecipe() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(foods),
         });
-
-        document.getElementById("successMessage").innerText = "The recipe is saved";
     }
+
+    let message = document.createElement("div"); // add message after saved recipe
+    if (successAdded === true) {
+        message.innerText = "Рецепт додан!";
+        message.className = "successMessage";
+    } else {
+        message.innerText = "Заповнить обов'язкові поля!";
+        message.className = "errorMessage";
+    }
+    let chosenRecipe = document.getElementById("mainContent");
+    chosenRecipe.appendChild(message);
+    
+    setTimeout(() => location.reload(), 5000);
 }

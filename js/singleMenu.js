@@ -13,7 +13,7 @@ function displayTitle() {
     let mainText = document.getElementById("mainText");
     let savedDate = new Date(Number(title)).toLocaleDateString();
     let savedTime = new Date(Number(title)).toLocaleTimeString();
-    mainText.innerText = `Menu_${savedDate} ${savedTime}`;
+    mainText.innerText = `Меню_${savedDate} ${savedTime}`;
 }
 
 // method to show the list of menus during on loading page
@@ -26,56 +26,91 @@ function showMenu() {
             let menuRow = document.createElement("li");
             menuRow.className = "menu-row";
             let unit;
-            if (prop === "eggs") {
-                unit = "pieces";
+            if (prop === "яйця") {
+                unit = "шт";
             } else {
-                unit = "grams";
+                unit = "гр";
             }
             menuRow.innerText = `${prop} ${breakfastValue[prop]} ${unit}`;
             breakfastDiv.appendChild(menuRow);
         }
+        let breakfastRecipeName = document.createElement("div");
+        breakfastRecipeName.className = "food-recipe-name";
+        breakfastRecipeName.innerText = Object.keys(value[`${title}`].breakfastRecipe);
+        breakfastDiv.appendChild(breakfastRecipeName);
+        let breakfastRecipe = document.createElement("div");
+        breakfastRecipe.className = "food-recipe";
+        breakfastRecipe.innerText = Object.values(value[`${title}`].breakfastRecipe);
+        breakfastDiv.appendChild(breakfastRecipe);
+
         let dinnerDiv = document.getElementsByClassName("mealDiv")[1]; // show dinner
         let dinnerValue = value[`${title}`].dinner;
         for (const prop in dinnerValue) {
             let menuRow = document.createElement("li");
             menuRow.className = "menu-row";
             let unit;
-            if (prop === "eggs") {
-                unit = "pieces";
+            if (prop === "яйця") {
+                unit = "шт";
             } else {
-                unit = "grams";
+                unit = "гр";
             }
             menuRow.innerText = `${prop} ${dinnerValue[prop]} ${unit}`;
             dinnerDiv.appendChild(menuRow);
         }
+        let dinnerRecipeName = document.createElement("div");
+        dinnerRecipeName.className = "food-recipe-name";
+        dinnerRecipeName.innerText = Object.keys(value[`${title}`].dinnerRecipe);
+        dinnerDiv.appendChild(dinnerRecipeName);
+        let dinnerRecipe = document.createElement("div");
+        dinnerRecipe.className = "food-recipe";
+        dinnerRecipe.innerText = Object.values(value[`${title}`].dinnerRecipe);
+        dinnerDiv.appendChild(dinnerRecipe);
+
         let snackDiv = document.getElementsByClassName("mealDiv")[2]; // show snack
         let snackValue = value[`${title}`].snack;
         for (const prop in snackValue) {
             let menuRow = document.createElement("li");
             menuRow.className = "menu-row";
             let unit;
-            if (prop === "eggs") {
-                unit = "pieces";
+            if (prop === "яйця") {
+                unit = "шт";
             } else {
-                unit = "grams";
+                unit = "гр";
             }
             menuRow.innerText = `${prop} ${snackValue[prop]} ${unit}`;
             snackDiv.appendChild(menuRow);
         }
+        let snackRecipeName = document.createElement("div");
+        snackRecipeName.className = "food-recipe-name";
+        snackRecipeName.innerText = Object.keys(value[`${title}`].snackRecipe);
+        snackDiv.appendChild(snackRecipeName);
+        let snackRecipe = document.createElement("div");
+        snackRecipe.className = "food-recipe";
+        snackRecipe.innerText = Object.values(value[`${title}`].snackRecipe);
+        snackDiv.appendChild(snackRecipe);
+
         let supperDiv = document.getElementsByClassName("mealDiv")[3]; // show supper
         let supperValue = value[`${title}`].supper;
         for (const prop in supperValue) {
             let menuRow = document.createElement("li");
             menuRow.className = "menu-row";
             let unit;
-            if (prop === "eggs") {
-                unit = "pieces";
+            if (prop === "яйця") {
+                unit = "шт";
             } else {
-                unit = "grams";
+                unit = "гр";
             }
             menuRow.innerText = `${prop} ${supperValue[prop]} ${unit}`;
             supperDiv.appendChild(menuRow);
         }
+        let supperRecipeName = document.createElement("div");
+        supperRecipeName.className = "food-recipe-name";
+        supperRecipeName.innerText = Object.keys(value[`${title}`].supperRecipe);
+        supperDiv.appendChild(supperRecipeName);
+        let supperRecipe = document.createElement("div");
+        supperRecipe.className = "food-recipe";
+        supperRecipe.innerText = Object.values(value[`${title}`].supperRecipe);
+        supperDiv.appendChild(supperRecipe);
     })
 }
 
@@ -90,10 +125,10 @@ function showProductsList() {
             let menuRow = document.createElement("li");
             menuRow.className = "list-row";
             let unit;
-            if (prop === "eggs") {
-                unit = "pieces";
+            if (prop === "яйця") {
+                unit = "шт";
             } else {
-                unit = "grams";
+                unit = "гр";
             }
 
             let alreadyAdded = false;
@@ -120,10 +155,10 @@ function showProductsList() {
             let menuRow = document.createElement("li");
             menuRow.className = "list-row";
             let unit;
-            if (prop === "eggs") {
-                unit = "pieces";
+            if (prop === "яйця") {
+                unit = "шт";
             } else {
-                unit = "grams";
+                unit = "гр";
             }
 
             let alreadyAdded = false;
@@ -150,10 +185,10 @@ function showProductsList() {
             let menuRow = document.createElement("li");
             menuRow.className = "list-row";
             let unit;
-            if (prop === "eggs") {
-                unit = "pieces";
+            if (prop === "яйця") {
+                unit = "шт";
             } else {
-                unit = "grams";
+                unit = "гр";
             }
 
             let alreadyAdded = false;
@@ -180,10 +215,10 @@ function showProductsList() {
             let menuRow = document.createElement("li");
             menuRow.className = "list-row";
             let unit;
-            if (prop === "eggs") {
-                unit = "pieces";
+            if (prop === "яйця") {
+                unit = "шт";
             } else {
-                unit = "grams";
+                unit = "гр";
             }
 
             let alreadyAdded = false;
