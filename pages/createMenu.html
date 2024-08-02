@@ -10,27 +10,11 @@
     </head>
     <body>
         <header>
-            <div>
-                <img id="logo2" src="../img/logo2.png" onclick="javascript:location.href='./index.html';">
-                <img id="logo" src="../img/logo.png" onclick="javascript:location.href='./index.html';">
+            <div onclick="javascript:location.href='./recipesList.html';">
+                <img id="logo2" src="../img/logo2.png">
+                <img id="logo" src="../img/logo.png">
             </div>
-            <div id="rightSideHeader">
-                <div id="searchContainer">
-                    <div id="searchDiv">
-                        <input type="text" id="searchField" placeholder=" Search ..." list="theList" oninput="searchMeal();">
-                    </div>
-                    <div id="searchBtn" href="./singlePage.html" onclick="saveSearchResult();">
-                      <img id="searchImg" src="../img/search.png" alt="Пошук">
-                    </div>
-                </div>
-                <div id="searchCheckbox">
-                    <input type="checkbox" id="recipeCheckbox" class="checkbox-search" name="recipeCheckbox" checked disabled>
-                    <label for="recipeCheckbox">Search by food name</label>
-                    <input type="checkbox" id="productCheckbox" class="checkbox-search" name="productCheckbox" disabled>
-                    <label for="productCheckbox">Search by ingredients</label>
-                </div>
-            </div>
-            <div id="mobileMenu">
+            <!-- <div id="mobileMenu">
                 <img id="menu" src="../img/menu.png">
                 <nav>
                     <li><a href="./index.html" onclick="displayPagination('Рецепти', 0); displayRecipes(0, 'Рецепти')">Recipes</a>
@@ -46,28 +30,28 @@
                     <li><a href="./createMenu.html">Create a menu</a></li>
                     <li><a href="./menuArchive.html">Archive of menus</a></li>
                 </nav>
-            </div>
+            </div> -->
         </header>
         <hr>
         <nav>
-            <li><a href="./index.html" onclick="displayPagination('Рецепти', 0); displayRecipes(0, 'Рецепти')">Recipes</a>
+            <li><a href="./recipesList.html" onclick="displayRecipes('Рецепти'); showRecipes();">Рецепти</a>
                 <ul class="mealWrapperNav">
-                    <li><a href="#" onclick="displayPagination('Сніданок', 0); displayRecipes(0, 'Сніданок')">Breakfast</a></li>
-                    <li><a href="#" onclick="displayPagination('Перекус', 0); displayRecipes(0, 'Перекус')">Snack</a></li>
-                    <li><a href="#" onclick="displayPagination('Обід', 0); displayRecipes(0, 'Обід')">Dinner</a>
-                    <li><a href="#" onclick="displayPagination('Вечеря', 0); displayRecipes(0, 'Вечеря')">Supper</a></li>
-                    <li><a href="#" onclick="displayPagination('Свято', 0); displayRecipes(0, 'Свято')">Holiday</a></li>
+                    <li><a href="./recipesList.html" onclick="displayRecipes('Сніданок'); showRecipes();">Сніданок</a></li>
+                    <li><a href="./recipesList.html" onclick="displayRecipes('Обід'); showRecipes();">Обід</a>
+                    <li><a href="./recipesList.html" onclick="displayRecipes('Перекус'); showRecipes();">Перекус</a></li>
+                    <li><a href="./recipesList.html" onclick="displayRecipes('Вечеря'); showRecipes();">Вечеря</a></li>
+                    <li><a href="./recipesList.html" onclick="displayRecipes('Свято'); showRecipes();">Свято</a></li>
                 </ul>
             </li>
-            <li><a href="./addNewRecipe.html">Add a recipe</a></li>
-            <li><a href="./createMenu.html">Create a menu</a></li>
-            <li><a href="./menuArchive.html">Archive of menus</a></li>
+            <li><a href="./createMenu.html">Скласти меню</a></li>
+            <li><a href="./menuArchive.html">Архів меню</a></li>
+            <li><a href="./addNewRecipe.html">Додати рецепт</a></li>
         </nav>
         <hr>
-        <h1 id="mainText">Create a menu</h1>
+        <h1 id="mainText">Скласти меню</h1>
         <main>
             <container id="leftSidebar">
-                <div class="container-name">Day types of food</div>
+                <div class="container-name">Категорії продуктів на день</div>
                 <div class="container-food">
                     <div class="food-item" onclick="moveFood(0);">
                         <div class="food"></div>
@@ -132,7 +116,7 @@
                             <div>%</div>
                         </div>
                     </div>
-                    <div class="food-item" onclick="moveFood(9);">
+                    <!-- <div class="food-item" onclick="moveFood(9);">
                         <div class="food"></div>
                         <div class="percent-tailings">
                             <div class="foodPercent">100</div>
@@ -159,26 +143,41 @@
                             <div class="foodPercent">100</div>
                             <div>%</div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </container>
             <container id="mainContentPage">
-                <div class="meal-name">Breakfast</div>
+                <div class="meal-name">Сніданок</div>
                 <div class="products-list-div"></div>
-                <div class="meal-name">Dinner</div>
+                <div class="recipe-list-div">
+                    <textarea class="recipe-list-input" placeholder="Скопіювати і вставити обранний рецепт використовуючи кнопку для копіювання рецепту. Отредактуйте опис рецепта, якщо були внесені зміни в приготування або інгредієнти"></textarea>
+                </div>
+                <div class="meal-name">Обід</div>
                 <div class="products-list-div"></div>
-                <div class="meal-name">Snack</div>
+                <div class="recipe-list-div">
+                    <textarea class="recipe-list-input" placeholder="Скопіювати і вставити обранний рецепт використовуючи кнопку для копіювання рецепту. Отредактуйте опис рецепта, якщо були внесені зміни в приготування або інгредієнти"></textarea>
+                </div>
+                <div class="meal-name">Перекус</div>
                 <div class="products-list-div"></div>
-                <div class="meal-name">Supper</div>
+                <div class="recipe-list-div">
+                    <textarea class="recipe-list-input" placeholder="Скопіювати і вставити обранний рецепт використовуючи кнопку для копіювання рецепту. Отредактуйте опис рецепта, якщо були внесені зміни в приготування або інгредієнти"></textarea>
+                </div>
+                <div class="meal-name">Вечеря</div>
                 <div class="products-list-div"></div>
-                <button id="result" type="button" onclick="saveMenu()">Save</button>
+                <div class="recipe-list-div">
+                    <textarea class="recipe-list-input" placeholder="Скопіювати і вставити обранний рецепт використовуючи кнопку для копіювання рецепту. Отредактуйте опис рецепта, якщо були внесені зміни в приготування або інгредієнти"></textarea>
+                </div>
+                <div class="element-div">
+                    <button id="result" type="button" onclick="saveMenu()">Зберегти</button>
+                </div>
                 <div id="successMessage"></div>
+                <div id="errorMessage"></div>
             </container>
             <container id="rightSidebar">
-                <div class="container-name">Choose a recipe</div>
+                <div class="container-name">Обрати рецепт</div>
                 <div id="rightSidebarDiv">
                     <div>
-                        <img id="addIcon" src="../img/add.png" alt="add recipe" onclick="">
+                        <img id="addIcon" src="../img/add.png" alt="add recipe" onclick="chooseRecipe()">
                     </div>
                     <div id="chosenRecipes"></div>
                 </div>

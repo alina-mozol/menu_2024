@@ -22,7 +22,7 @@ function showMenus() {
 
             let savedDate = new Date(Number(Object.keys(value)[i])).toLocaleDateString();
             let savedTime = new Date(Number(Object.keys(value)[i])).toLocaleTimeString();
-            menuLink.innerText = `Menu_${savedDate} ${savedTime}`;
+            menuLink.innerText = `Меню_${savedDate} ${savedTime}`;
             menuLink.setAttribute("href", "./singleMenu.html");
             menuLink.setAttribute("onclick", `openedPage(${Object.keys(value)[i]})`);
             menuRow.setAttribute("value", `${Object.keys(value)[i]}`);
