@@ -2,6 +2,7 @@ window.onload = function() {
     displayTitle();
     showMenu();
     showProductsList();
+    document.getElementsByClassName("navItem")[2].style.color = "#ff914d";
 }
 
 async function getData(url) {
