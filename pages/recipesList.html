@@ -15,12 +15,33 @@
                 <img id="logo" src="../img/logo.png">
             </div>
             <div id="rightSideHeader">
-                <div id="searchContainer">
-                    <div id="searchDiv">
-                        <input type="text" id="searchField" placeholder="Пошук ..." list="theList">
+                <div id="headerContainer">
+                    <div id="searchContainer">
+                        <div id="searchDiv">
+                            <input type="text" id="searchField" placeholder="Пошук ..." list="theList">
+                        </div>
+                        <div id="searchBtn" href="./recipesList.html" onclick="searchRecipe(); setTimeout(() => showRecipes(), 100);">
+                            <img id="searchImg" src="../img/search.png" alt="Пошук">
+                        </div>
                     </div>
-                    <div id="searchBtn" href="./recipesList.html" onclick="searchRecipe(); setTimeout(() => showRecipes(), 100);">
-                      <img id="searchImg" src="../img/search.png" alt="Пошук">
+                    <div>
+                        <div id="mobileMenu">
+                            <img id="menuIcon" src="../img/burger.png" onclick="expandMenu();">
+                            <nav id="mobileNav">
+                                <li><a class="navItem" href="./recipesList.html" onclick="displayRecipes('Рецепти'); showRecipes();">Рецепти</a>
+                                    <ul class="mealWrapperNav">
+                                        <li><a href="#" onclick="displayRecipes('Сніданок'); setTimeout(() => showRecipes(), 100);">Сніданок</a></li>
+                                        <li><a href="#" onclick="displayRecipes('Обід'); setTimeout(() => showRecipes(), 100);">Обід</a>
+                                        <li><a href="#" onclick="displayRecipes('Перекус'); setTimeout(() => showRecipes(), 100);">Перекус</a></li>
+                                        <li><a href="#" onclick="displayRecipes('Вечеря'); setTimeout(() => showRecipes(), 100);">Вечеря</a></li>
+                                        <li><a href="#" onclick="displayRecipes('Свято'); setTimeout(() => showRecipes(), 100);">Свято</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="navItem" href="./createMenu.html">Скласти меню</a></li>
+                                <li><a class="navItem" href="./menuArchive.html">Архів меню</a></li>
+                                <li><a class="navItem" href="./addNewRecipe.html">Додати рецепт</a></li>
+                            </nav>
+                        </div>
                     </div>
                 </div>
                 <div id="searchCheckbox">

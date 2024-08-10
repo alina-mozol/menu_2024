@@ -8,6 +8,10 @@ async function getData(url) {
     return (await fetch(url)).json();
 }
 
+function expandMenu() {
+    //
+} 
+
 // display recipes according to food type: breakfast. dinner, supper
 function displayRecipes(foodType) {
     let mainText = document.getElementById("mainText");
