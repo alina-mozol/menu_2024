@@ -1,5 +1,6 @@
 window.onload = function() {
     showMenus();
+    document.getElementsByClassName("navItem")[2].style.color = "#ff914d";
 }
 
 async function getData(url) {
@@ -27,21 +28,20 @@ function showMenus() {
             menuLink.setAttribute("onclick", `openedPage(${Object.keys(value)[i]})`);
             menuRow.setAttribute("value", `${Object.keys(value)[i]}`);
             deleteDiv.innerText = "X";
-            deleteDiv.addEventListener('click', function(e) {
+            let name = menuLink.innerText;
+            deleteDiv.addEventListener('click', function() {
                 let quantityRows = document.getElementsByClassName("menu-row-list");
-                let deletedMenuIndex = 0;
+                let nameDeletedRecipe = document.getElementsByClassName("menu-item");
 
-                for (let i = 0; i < quantityRows.length; i++) {
-                    if (deleteDiv.parentNode == quantityRows[i]) {
-                        let deletedMenu = quantityRows[deletedMenuIndex].getAttribute("value");
-                        deleteDiv.parentNode.remove();
-                        delete value[deletedMenu];
+                for (let index = 0; index < quantityRows.length; index++) {
+                    if (nameDeletedRecipe[index].innerText == name) {
+                        quantityRows[index].remove();
+                        delete value[Number(Object.keys(value)[index])];
                         const saveOp = fetch('http://localhost:3000/saveMenu', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(value),
                         });
-                        document.location.reload();
                     }
                 }
             });

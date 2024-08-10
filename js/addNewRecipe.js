@@ -1,5 +1,6 @@
 window.onload = function() {
     showProducts();
+    document.getElementsByClassName("navItem")[3].style.color = "#ff914d";
 }
 
 async function getData(url) {

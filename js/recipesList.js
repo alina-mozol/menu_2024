@@ -1,11 +1,16 @@
 window.onload = function() {
-    showRecipes();
+    setTimeout(() => showRecipes(), 100);
     showAddedRecipes();
+    document.getElementsByClassName("navItem")[0].style.color = "#ff914d";
 }
 
 async function getData(url) {
     return (await fetch(url)).json();
 }
+
+function expandMenu() {
+    //
+} 
 
 // display recipes according to food type: breakfast. dinner, supper
 function displayRecipes(foodType) {
@@ -13,14 +18,43 @@ function displayRecipes(foodType) {
     mainText.innerText = foodType;
 }
 
+// scroll up scroll down
+function scrollPage(position) {
+    let scrollBtn = document.getElementsByClassName("scrollBtn");
+    if (position == "upper") {
+        scrollBtn[0].setAttribute("src", "../img/upper_green.png");
+        window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
+    } else {
+        window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
+        scrollBtn[1].setAttribute("src", "../img/lower_green.png");
+    }
+    setTimeout(() => {
+        scrollBtn[0].setAttribute("src", "../img/upper_purple.png");
+        scrollBtn[1].setAttribute("src", "../img/lower_purple.png");
+    }, 1000);
+}
+
 // method to show the list of daily products on the left sidebar during on loading page
 async function showRecipes() {
-    let allRecipeDiv = await document.getElementById("allRecipeDiv"); // delete div with previously shown recipes
+    let mainText = document.getElementById("mainText").innerText;
+    let allRecipeDiv = document.getElementById("allRecipeDiv"); // delete div with previously shown recipes
     if (document.getElementById("allRecipeDiv")) {
         allRecipeDiv.remove();
     }
+    let trimmedSearchedValue = [];
+    if (mainText != "Результати пошуку:") {
+        document.getElementById("chosenRecipes").innerText = "";
+    } else {
+        let chosenRecipes = localStorage.getItem('foundRecipes');
+        console.log(chosenRecipes)
+        let splitSearchValue = chosenRecipes.split(',');
+            
+        for (let index = 0; index < splitSearchValue.length; index++) {
+            trimmedSearchedValue.push(splitSearchValue[index].trim());
+        }
+    }
+    
 
-    let mainText = document.getElementById("mainText").innerText; 
     await getData('http://localhost:3000/get').then((value) => {
         let mainContainer = document.getElementById("mainRecipeContainer"); // create main content with all recipes
         let allRecipeDiv = document.createElement("div");
@@ -29,7 +63,7 @@ async function showRecipes() {
 
         for (let i = 0; i < value.length; i++) {
             let allRecipeDiv = document.getElementById("allRecipeDiv");
-            if (value[i].topic == mainText || mainText == "Рецепти") {
+            if (value[i].topic == mainText || mainText == "Рецепти" || (mainText == "Результати пошуку:" && trimmedSearchedValue.includes(value[i].recipeName))) {
                 let recipeDiv = document.createElement("div");
                 recipeDiv.className = "recipe";
                 allRecipeDiv.appendChild(recipeDiv);
@@ -108,7 +142,6 @@ async function showRecipes() {
                 let recipeBtn = document.createElement("div");
                 recipeBtn.className = "choose-recipe";
                 recipeBtn.innerText = "Обрати рецепт";
-                // recipeBtn.setAttribute("onclick", `addRecipe(${i});`);
                 recipeBtn.setAttribute("onclick", `addRecipe("${value[i].recipeName}")`);
                 recipeBtnDiv.appendChild(recipeBtn);
 
@@ -169,7 +202,6 @@ function addRecipe(recipeName) {
         shownMessage.remove();
     }
 
-    console.log(111, "recipeName")
     if (document.getElementById("recipeMessage")) {
         let shownMessage = document.getElementById("recipeMessage"); // remove shown message
         shownMessage.remove();
@@ -182,7 +214,6 @@ function addRecipe(recipeName) {
             num = i;
         }
     }
-    console.log(222, num)
     let addedRecipes = document.getElementsByClassName("added-recipe");
     let alreadyAdded = false;
     for (let index = 0; index < addedRecipes.length; index++) {
