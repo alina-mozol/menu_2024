@@ -310,7 +310,7 @@ main {
     font-weight: bold;
 }
 
-#rightSidebar {
+#rightSidebar, #leftSidebar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
